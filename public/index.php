@@ -20,7 +20,7 @@ require("../serve.php");
 			<?=$_ENV['APP_NAME']?>
 		</div>
 		<ul class="ul-slide">
-            
+
 		</ul>
 	</div>
 
