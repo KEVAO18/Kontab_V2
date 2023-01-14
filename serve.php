@@ -1,6 +1,16 @@
 <?php
 
-    require('vendor/autoload.php');
+/**
+ * 
+ * @KEVAO18
+ * 
+ */
 
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
+   require('vendor/autoload.php');
+
+   $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+   $dotenv->load();
+
+   require('controllers/routesController.php');
+
+   $ruta = new routesController();

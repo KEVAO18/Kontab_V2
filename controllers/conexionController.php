@@ -2,13 +2,16 @@
 
 require_once('../serve.php');
 
+/**
+ * @KEVAO18
+ */
 class conexionController {
     public function __construct(){
-
     }
 
     public function conect()
     {
+		
 
 		try {
 			$con = "mysql:host=".$_ENV['DB_HOST'].";dbname=".$_ENV['DB_NAME'].";charset=".$_ENV['DB_CHARSET'];
@@ -21,7 +24,7 @@ class conexionController {
 		} catch (PDOException $e) {
 			?>
 			<div class="card p-4 text-center">
-				<?=$e->getmessage()?>
+				<?=$e->getMessage()?>
 			</div>
 			<?php
 		}
