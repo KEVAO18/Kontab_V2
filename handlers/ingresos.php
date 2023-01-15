@@ -15,8 +15,8 @@ class ingresos extends sqlController{
         $this->datos = new sqlController();
     }
 
-    public function allColums(){
-        return $this->datos->All('ingresos');
+    public function allIngresos(){
+        return $this->datos->where('totales', 'tipo', 0);
     }
 
 }

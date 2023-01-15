@@ -15,8 +15,8 @@ class egresos extends sqlController{
         $this->datos = new sqlController();
     }
 
-    public function allColums(){
-        return $this->datos->All('egresos');
+    public function allEgresos(){
+        return $this->datos->where('totales', 'tipo', 1);
     }
 
 }

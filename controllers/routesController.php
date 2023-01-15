@@ -30,6 +30,16 @@ class routesController{
                 egresos();
                 break;
 
+            case "totales":
+                include_once '../web/'.$ruta[0].'.php';
+                totales();
+                break;
+
+            case "insertar":
+                include_once '../web/'.$ruta[0].'.php';
+                insertar();
+                break;
+
             case "e403":
                 echo $ruta[0];
                 break;
