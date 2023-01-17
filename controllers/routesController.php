@@ -40,6 +40,11 @@ class routesController{
                 insertar();
                 break;
 
+            case "actualizar":
+                include_once '../web/'.$ruta[0].'.php';
+                actualizar($ruta[1]);
+                break;
+
             case "e403":
                 echo $ruta[0];
                 break;

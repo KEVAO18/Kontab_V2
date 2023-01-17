@@ -38,7 +38,7 @@ function insertar(){
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Monto a ingresar" name="monto">
+                            <input type="number" class="form-control" aria-label="Monto a ingresar" name="monto">
                         </div>
                     </div>
                 </div>

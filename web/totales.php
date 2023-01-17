@@ -29,6 +29,7 @@ function totales(){
                         <th scope="concepto">Concepto</th>
                         <th scope="saldo">Saldo</th>
                         <th scope="tipo">Tipo</th>
+                        <th scope="acciones">acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,13 +48,17 @@ function totales(){
                                 echo "<td>Ingreso</td>";
                                 $suma += $data['monto'];
                                 break;
-
-                            case '1':
-                                echo "<td>Egreso</td>";
-                                $suma -= $data['monto'];
-                                break;
-                        }
-                        ?>
+                                
+                                case '1':
+                                    echo "<td>Egreso</td>";
+                                    $suma -= $data['monto'];
+                                    break;
+                                }
+                                ?>
+                        <td>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/<?=$data['id']?>" class="btn btn-outline-info">Actualizra</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/eliminar.php?id=<?=$data['id']?>" class="btn btn-outline-danger">Eliminar</a>
+                        </td>
                     </tr>
                 <?php
                     }
@@ -63,6 +68,7 @@ function totales(){
                     <td></td>
                     <td></td>
                     <td><?=$suma?></td>
+                    <td></td>
                     <td></td>
                 </tr>
                 </tbody>
