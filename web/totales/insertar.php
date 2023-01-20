@@ -7,7 +7,7 @@
  */
 function insertar(){
     
-    require_once('../handlers/totales.php');
+    require_once('../handlers/totales/totales.php');
 
     $totales = new totales();
 
@@ -21,7 +21,7 @@ function insertar(){
 
     <section>
         <article class="card p-4" id="insert-form">
-            <form action="<?=$_ENV['PAGE_SERVE']?>handlers/insertar.php" method="post">
+            <form action="<?=$_ENV['PAGE_SERVE']?>handlers/totales/insertar.php" method="post">
                 <select class="form-select" aria-label="tipos" name="tipos">
                     <option selected>Ingreso ó Egreso</option>
                     <option value="0">Ingreso</option>

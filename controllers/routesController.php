@@ -21,28 +21,42 @@ class routesController{
         switch ($ruta[0]) {
 
             case "ingresos":
-                include_once '../web/'.$ruta[0].'.php';
+                include_once '../web/totales/'.$ruta[0].'.php';
                 ingresos();
                 break;
 
             case "egresos":
-                include_once '../web/'.$ruta[0].'.php';
+                include_once '../web/totales/'.$ruta[0].'.php';
                 egresos();
                 break;
 
             case "totales":
-                include_once '../web/'.$ruta[0].'.php';
+                include_once '../web/totales/'.$ruta[0].'.php';
                 totales();
                 break;
 
             case "insertar":
-                include_once '../web/'.$ruta[0].'.php';
-                insertar();
+                switch ($ruta[1]) {
+                    case 'ingreso':
+                        include_once '../web/totales/'.$ruta[0].'.php';
+                        insertar();
+                        break;
+                    
+                    case 'cliente':
+                        include_once '../web/clientes/'.$ruta[0].'.php';
+                        insertar();
+                        break;
+                }
                 break;
 
             case "actualizar":
-                include_once '../web/'.$ruta[0].'.php';
+                include_once '../web/totales/'.$ruta[0].'.php';
                 actualizar($ruta[1]);
+                break;
+
+            case "clientes":
+                include_once '../web/clientes/'.$ruta[0].'.php';
+                clientes();
                 break;
 
             case "e403":

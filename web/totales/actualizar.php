@@ -7,7 +7,7 @@
  */
 function actualizar($id){
     
-    require_once('../handlers/totales.php');
+    require_once('../handlers/totales/totales.php');
 
     $totales = new totales();
 
@@ -21,7 +21,7 @@ function actualizar($id){
 
     <section>
         <article class="card p-4" id="insert-form">
-            <form action="<?=$_ENV['PAGE_SERVE']?>handlers/actualizar.php" method="post">
+            <form action="<?=$_ENV['PAGE_SERVE']?>handlers/totales/actualizar.php" method="post">
                 <?php
             foreach ($datos as $d) {
                 ?>

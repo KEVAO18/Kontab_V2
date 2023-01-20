@@ -5,13 +5,13 @@
  * 
  * @return void
  */
-function egresos(){
+function ingresos(){
     
-    require_once('../handlers/egresos.php');
+    require_once('../handlers/totales/ingresos.php');
 
-    $egresos = new egresos();
+    $ingresos = new ingresos();
 
-    $datos = $egresos->allEgresos();
+    $datos = $ingresos->allIngresos();
 
     $suma = 0;
 
@@ -48,7 +48,7 @@ function egresos(){
                 </tbody>
             </table>
             <div class="d-grid gap-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>insertar" class="btn btn-outline-dark">Añadir Egreso</a>
+                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Añadir Ingreso</a>
             </div>
         </article>
     </section>

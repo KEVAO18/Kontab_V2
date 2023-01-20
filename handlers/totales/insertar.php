@@ -1,6 +1,6 @@
 <?php
 
-require_once ('../handlers/totales.php');
+require_once ('totales.php');
 
 
 
@@ -22,5 +22,5 @@ if ($_POST['tipos'] == 0 || $_POST['tipos'] == 1) {
     <?php
 }
 
-header("Location: ../insertar");
+header("Location: ../../totales");
 ?>

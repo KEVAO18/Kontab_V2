@@ -7,7 +7,7 @@
  */
 function totales(){
     
-    require_once('../handlers/totales.php');
+    require_once('../handlers/totales/totales.php');
 
     $totales = new totales();
 
@@ -57,7 +57,7 @@ function totales(){
                                 ?>
                         <td>
                             <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/<?=$data['id']?>" class="btn btn-outline-info">Actualizra</a>
-                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/eliminar.php?id=<?=$data['id']?>" class="btn btn-outline-danger">Eliminar</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/totales/eliminar.php?id=<?=$data['id']?>" class="btn btn-outline-danger">Eliminar</a>
                         </td>
                     </tr>
                 <?php
@@ -74,7 +74,7 @@ function totales(){
                 </tbody>
             </table>
             <div class="d-grid gap-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>insertar" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</a>
+                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</a>
             </div>
         </article>
     </section>
