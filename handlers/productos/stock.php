@@ -11,7 +11,7 @@ try {
  * @KEVAO18
  * 
  */
-class totales extends sqlController{
+class productos extends sqlController{
 
     private $datos;
 
@@ -20,27 +20,27 @@ class totales extends sqlController{
     }
 
     public function allColums(){
-        return $this->datos->All('totales');
+        return $this->datos->All('productos');
     }
 
     public function insertarDatos($tipo, $concepto, $monto){
-        $this->datos->insert('totales', 'id, tipo, fecha, concepto, monto', "NULL, ".$tipo.", NULL, '".$concepto."', ".$monto);
+        $this->datos->insert('productos', 'id, tipo, fecha, concepto, monto', "NULL, ".$tipo.", NULL, '".$concepto."', ".$monto);
     }
 
     public function allOfOneType($type){
-        return $this->datos->where('totales', 'tipo', $type);
+        return $this->datos->where('productos', 'tipo', $type);
     }
 
     public function actualizarDatos($columna, $id, $val, $oper = '='){
-        $this->datos->update('totales', $columna, $id, $val, $oper);
+        $this->datos->update('productos', $columna, $id, $val, $oper);
     }
 
     public function eliminarDatos($columna, $val, $oper = '='){
-        $this->datos->delete('totales', $columna, $val, $oper);
+        $this->datos->delete('productos', $columna, $val, $oper);
     }
 
     public function onlyOne($id){
-        return $this->datos->where('totales', 'id', $id);
+        return $this->datos->where('productos', 'id', $id);
     }
 
 }

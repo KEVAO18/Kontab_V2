@@ -7,11 +7,11 @@
  */
 function ingresos(){
     
-    require_once('../handlers/totales/ingresos.php');
+    require_once('../handlers/totales/totales.php');
 
-    $ingresos = new ingresos();
+    $ingresos = new totales();
 
-    $datos = $ingresos->allIngresos();
+    $datos = $ingresos->allOfOneType(0);
 
     $suma = 0;
 

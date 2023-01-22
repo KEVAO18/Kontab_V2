@@ -17,7 +17,7 @@ if ($_POST['estado'] == 0 || $_POST['estado'] == 1) {
 }else{
     ?>
     <script>
-        alert("Error datos erroneos");
+        alert("Error: datos erroneos");
     </script>
     <?php
 }

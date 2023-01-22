@@ -10,10 +10,10 @@ require_once ('totales.php');
  * 
  */
 
-   $totales = new totales();
+  $totales = new totales();
 
-   $totales->actualizarDatos('concepto', $_POST['id'], $_POST['concepto']);
+  $totales->actualizarDatos('concepto', $_POST['id'], $_POST['concepto']);
 
-   $totales->actualizarDatos('monto', $_POST['id'], $_POST['monto']);
+  $totales->actualizarDatos('monto', $_POST['id'], $_POST['monto']);
 
-   header("Location: ../../totales");
+  header("Location: ../../totales");

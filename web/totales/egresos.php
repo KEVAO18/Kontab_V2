@@ -7,11 +7,11 @@
  */
 function egresos(){
     
-    require_once('../handlers/totales/egresos.php');
+    require_once('../handlers/totales/totales.php');
 
-    $egresos = new egresos();
+    $ingresos = new totales();
 
-    $datos = $egresos->allEgresos();
+    $datos = $ingresos->allOfOneType(1);
 
     $suma = 0;
 

@@ -59,8 +59,8 @@ function clientes(){
                         }
                         ?>
                         <td>
-                            <a href="<?=$_ENV['PAGE_SERVE']?>" class="btn btn-outline-info">Actualizra</a>
-                            <a href="<?=$_ENV['PAGE_SERVE']?>" class="btn btn-outline-danger">Eliminar</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/clientes/<?=$data['id']?>" class="btn btn-outline-info">Actualizra</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/clientes/eliminar.php?id=<?=$data['id']?>" class="btn btn-outline-danger">Eliminar</a>
                         </td>
                     </tr>
                 <?php
