@@ -46,6 +46,11 @@ class routesController{
                         include_once '../web/clientes/'.$ruta[0].'.php';
                         insertar();
                         break;
+                    
+                    case 'producto':
+                        include_once '../web/productos/'.$ruta[0].'.php';
+                        insertar();
+                        break;
                 }
                 break;
 
@@ -59,6 +64,11 @@ class routesController{
                     case 'clientes':
                         include_once '../web/clientes/'.$ruta[0].'.php';
                         actualizar($ruta[2]);
+                        break;
+                    
+                    case 'producto':
+                        include_once '../web/clientes/'.$ruta[0].'.php';
+                        insertar();
                         break;
                 }
                 break;
@@ -76,12 +86,12 @@ class routesController{
 
             case "salientes":
                 include_once '../web/productos/'.$ruta[0].'.php';
-                salientes();
+                //salientes();
                 break;
 
             case "ingresados":
                 include_once '../web/productos/'.$ruta[0].'.php';
-                ingresados();
+                //ingresados();
                 break;
 
             case "e403":

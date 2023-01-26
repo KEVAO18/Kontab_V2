@@ -7,7 +7,7 @@
  */
 function stock(){
     
-    require_once('../handlers/productos/stock.php');
+    require_once('../handlers/productos/productos.php');
 
     $productos = new productos();
 
@@ -25,12 +25,11 @@ function stock(){
                 <thead>
                     <tr>
                         <th scope="id">#</th>
-                        <th scope="documento">Codigo</th>
+                        <th scope="codigo">Codigo</th>
                         <th scope="nombre">Nombre</th>
-                        <th scope="direccion">Precio Unidad</th>
-                        <th scope="ciudad">Entradas</th>
-                        <th scope="telefono">Salidas</th>
-                        <th scope="correo">Stock</th>
+                        <th scope="unidad">Precio Unidad</th>
+                        <th scope="stock">Stock</th>
+                        <th scope="actions"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,8 +42,6 @@ function stock(){
                         <td><?=$data['id']?></td>
                         <td><?=$data['nombre']?></td>
                         <td><?=$data['precio']?></td>
-                        <td><?=$data['entradas']?></td>
-                        <td><?=$data['salidas']?></td>
                         <td><?=$data['stock']?></td>
                         <td>
                             <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/clientes/<?=$data['id']?>" class="btn btn-outline-info">Actualizra</a>
@@ -57,7 +54,7 @@ function stock(){
                 </tbody>
             </table>
             <div class="d-grid gap-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/cliente" class="btn btn-outline-dark">Añadir Producto</a>
+                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/producto" class="btn btn-outline-dark">Añadir Producto</a>
             </div>
         </article>
     </section>

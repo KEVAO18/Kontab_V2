@@ -1,9 +1,9 @@
 <?php
 
 try {
-    require_once ('../controllers/sqlController.php');
+    @require_once ('../controllers/sqlController.php');
 } catch (\Throwable $th) {
-    require_once ('../../controllers/sqlController.php');
+    @require_once ('../../controllers/sqlController.php');
 }
 
 /**
@@ -23,12 +23,12 @@ class productos extends sqlController{
         return $this->datos->All('productos');
     }
 
-    public function insertarDatos($tipo, $concepto, $monto){
-        $this->datos->insert('productos', 'id, tipo, fecha, concepto, monto', "NULL, ".$tipo.", NULL, '".$concepto."', ".$monto);
-    }
-
-    public function allOfOneType($type){
-        return $this->datos->where('productos', 'tipo', $type);
+    public function insertarDatos($id, $nombre, $precio, $stock){
+        $this->datos->insert(
+            'productos', 
+            'id, nombre, precio, stock', 
+            "'".$id."', '".$nombre."', ".$precio.", ".$stock
+        );
     }
 
     public function actualizarDatos($columna, $id, $val, $oper = '='){
