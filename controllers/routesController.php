@@ -67,8 +67,8 @@ class routesController{
                         break;
                     
                     case 'producto':
-                        include_once '../web/clientes/'.$ruta[0].'.php';
-                        insertar();
+                        include_once '../web/productos/'.$ruta[0].'.php';
+                        actualizar($ruta[2]);
                         break;
                 }
                 break;
