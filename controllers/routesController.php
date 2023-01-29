@@ -89,9 +89,9 @@ class routesController{
                 //salientes();
                 break;
 
-            case "ingresados":
+            case "entradas":
                 include_once '../web/productos/'.$ruta[0].'.php';
-                //ingresados();
+                entradas();
                 break;
 
             case "e403":

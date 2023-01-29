@@ -20,11 +20,11 @@ class entradas extends sqlController{
     }
 
     public function allColums(){
-        return $this->datos->All('entradas');
+        return $this->datos->All('entradas');//102 01 18
     }
 
     public function insertarDatos($id, $nombre, $cant){
-        $this->datos->insert('entradas', 'id, nombre, fecha, cantidad', "'".$id."', ".$nombre.", NULL, ".$cant);
+        $this->datos->insert('entradas', 'id, indice, nombre, fecha, cantidad', " NULL , '".$id."', '".$nombre."', NULL, ".$cant);
     }
 
     public function actualizarDatos($columna, $id, $val, $oper = '='){

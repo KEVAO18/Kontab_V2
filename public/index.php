@@ -40,7 +40,7 @@ require("../serve.php");
 							Control de Inventario
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
-							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>ingresados">Ingresados</a></li>
+							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>entradas">Ingresados</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>salientes">Salientes</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>stock">En stock</a></li>	
 						</ul>
