@@ -19,6 +19,9 @@ function ingresos(){
 
     <section>
         <article>
+            <div class="d-grid gap-4 py-4">
+                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Añadir Ingreso</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -47,9 +50,6 @@ function ingresos(){
                 </tr>
                 </tbody>
             </table>
-            <div class="d-grid gap-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Añadir Ingreso</a>
-            </div>
         </article>
     </section>
 

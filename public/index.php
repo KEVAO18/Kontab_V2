@@ -10,15 +10,14 @@ require("../serve.php");
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title><?=$_ENV['APP_NAME']." - ".$_GET['p']?></title>
-	<!-- Font Awesome -->
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
 	<!-- Bootstrap -->
-	<link href="vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="<?=$_ENV['PAGE_SERVE']?>vendor/twbs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<link href="<?=$_ENV['PAGE_SERVE']?>assets/css/mainStyles.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark" id="nav">
 		<div class="container">
-			<a class="navbar-brand" href="<?=$_ENV['PAGE_SERVE']?>menu"><?=$_ENV['APP_NAME']?></a>
+			<a class="navbar-brand disabled" href="<?=$_ENV['PAGE_SERVE']?>menu"><?=$_ENV['APP_NAME']?></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -32,7 +31,7 @@ require("../serve.php");
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>ingresos">Ingresos</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>egresos">Egresos</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>totales">Totales</a></li>
-							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>cobros">Cuentas por cobrar</a></li>
+							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>cobros">Cuentas por cobrar</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -41,7 +40,7 @@ require("../serve.php");
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>entradas">Ingresados</a></li>
-							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>salientes">Salientes</a></li>
+							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>salientes">Salientes</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>stock">En stock</a></li>	
 						</ul>
 					</li>
@@ -50,8 +49,8 @@ require("../serve.php");
 							Factura
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
-							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>factura">Nueva factura</a></li>
-							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>ventas">Ventas diarias</a></li>	
+							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>factura">Nueva factura</a></li>
+							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>ventas">Ventas diarias</a></li>	
 						</ul>
 					</li>
 					<li class="nav-item ">
@@ -64,6 +63,7 @@ require("../serve.php");
 	
 	<main class="container py-4">
 		<?=$ruta->outRoute()?>
+		<a href="#nav" class="btn btn-dark float-end boton-flotante">↑</a>
 	</main>
 
 
@@ -72,6 +72,6 @@ require("../serve.php");
     <!-- JQuery -->
     <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
 	<!-- Bootstra -->
-	<script src="vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="<?=$_ENV['PAGE_SERVE']?>vendor/twbs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

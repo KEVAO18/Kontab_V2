@@ -21,6 +21,9 @@ function stock(){
 
     <section>
         <article>
+            <div class="d-grid gap-4 py-4" id="add">
+                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/producto" class="btn btn-outline-dark">Añadir Producto</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -44,7 +47,7 @@ function stock(){
                         <td><?=$data['precio']?></td>
                         <td><?=$data['stock']?></td>
                         <td>
-                            <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/producto/<?=$data['id']?>" class="btn btn-outline-info">Actualizra</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/producto/<?=$data['id']?>" class="btn btn-outline-info">Actualizar</a>
                             <a href="<?=$_ENV['PAGE_SERVE']?>handlers/productos/eliminar.php?id=<?=$data['id']?>" class="btn btn-outline-danger">Eliminar</a>
                         </td>
                     </tr>
@@ -53,9 +56,6 @@ function stock(){
                 ?>
                 </tbody>
             </table>
-            <div class="d-grid gap-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/producto" class="btn btn-outline-dark">Añadir Producto</a>
-            </div>
         </article>
     </section>
 

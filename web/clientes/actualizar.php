@@ -84,7 +84,7 @@ function actualizar($id){
             ?>
             <br>
                 <div class="d-grid gap-4">
-                    <button type="submit" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</button>
+                    <button type="submit" class="btn btn-outline-dark">Actualizar datos del cliente</button>
                 </div>
             </form>
         </article>

@@ -48,7 +48,7 @@ function entradas(){
                 </div>
             </div>
                 <div class="d-grid gap-4">
-                    <button type="submit" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</button>
+                    <button type="submit" class="btn btn-outline-dark">Ingresar productos al sistema</button>
                 </div>
             </form>
         </article>

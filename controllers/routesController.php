@@ -94,6 +94,11 @@ class routesController{
                 entradas();
                 break;
 
+            case "menu":
+                include_once '../web/main/'.$ruta[0].'.php';
+                menu();
+                break;
+
             case "e403":
                 echo $ruta[0];
                 break;

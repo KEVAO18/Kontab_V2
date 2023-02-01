@@ -21,6 +21,9 @@ function totales(){
 
     <section>
         <article>
+            <div class="d-grid gap-4 py-4">
+                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</a>
+            </div>
             <table class="table">
                 <thead>
                     <tr>
@@ -56,7 +59,7 @@ function totales(){
                                 }
                                 ?>
                         <td>
-                            <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/ingreso/<?=$data['id']?>" class="btn btn-outline-info">Actualizra</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/ingreso/<?=$data['id']?>" class="btn btn-outline-info">Actualizar</a>
                             <a href="<?=$_ENV['PAGE_SERVE']?>handlers/totales/eliminar.php?id=<?=$data['id']?>" class="btn btn-outline-danger">Eliminar</a>
                         </td>
                     </tr>
@@ -73,9 +76,6 @@ function totales(){
                 </tr>
                 </tbody>
             </table>
-            <div class="d-grid gap-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</a>
-            </div>
         </article>
     </section>
 
