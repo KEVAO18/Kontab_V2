@@ -99,6 +99,11 @@ class routesController{
                 menu();
                 break;
 
+            case 'facturas':
+                include_once '../web/facturas/'.$ruta[0].'.php';
+                facturas();
+                break;
+
             case "e403":
                 echo $ruta[0];
                 break;

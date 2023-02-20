@@ -24,7 +24,7 @@ function menu(){
                             <a href="<?=$_ENV['PAGE_SERVE']?>totales" class="btn btn-outline-dark">Tabla de Totales</a>
                         </div>
                         <div class="d-grid gap-4 py-2 px-4">
-                            <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Ingresar un Nuevo ingreso</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>insertar/ingreso" class="btn btn-outline-dark">Ingreso nuevo (Ingresos ó Egresos)</a>
                         </div>
                     </div>
                 </div>

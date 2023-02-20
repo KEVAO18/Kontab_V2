@@ -75,6 +75,7 @@ function clientes(){
     </section>
 
     <?php
+
 }
 
 ?>
