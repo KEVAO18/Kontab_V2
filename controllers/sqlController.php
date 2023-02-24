@@ -110,28 +110,111 @@ class sqlController extends conexionController{
 		return $this->consultaSQL("SELECT * FROM $tabla WHERE $columna $oper '$val'");
 	}
 
+	/**
+	 * 
+	 * @param string $tabla es la tabla a la que se le desean ingresar los datos
+	 * 
+	 * @param string $columnas columnas a insertar
+	 * 
+	 * @param string $valores valor de las columnas anteriormente ingresadas
+	 * 
+	 * @method insert($tabla, $columnas, $valores) ingresa los $valores en las $columnas de la $tabla
+	 * 
+	 */
+
 	public function insert($tabla, $columnas, $valores){
 		$q = $this->consultaSQL("INSERT INTO $tabla ($columnas) VALUES ($valores)");
 	}
+
+	/**
+	 * 
+	 * @param string $tabla es la tabla a la que se le  quiere eliminar informacion
+	 * 
+	 * @param string $columna columna de comparacion, generalmente es id o la columna de la clave primaria
+	 * 
+	 * @param string $val valor a comparar con la columna, puede variar
+	 * 
+	 * @param string $oper valor definido para eloperador de la comparacion, es = por defecto
+	 * 
+	 * @method delete($tabla, $columna, $val) elimina las entradas encontradas a partir de la comparacion
+	 * 
+	 * @method delete($tabla, $columna, $val, $oper = '=') elimina las entradas encontradas a partir de la comparacion
+	 * 
+	 */
 
 	public function delete($tabla, $columna, $val, $oper = '='){
 		$q = $this->consultaSQL("DELETE FROM $tabla WHERE $columna $oper '$val'");
 	}
 
+	/**
+	 * 
+	 * @param string $tabla es la tabla a la que se le quiere actualizar
+	 * 
+	 * @param string $columna columna definida para actualizar
+	 * 
+	 * @param int $id clave primaria de la tabla, usada para comparar campos y encontrar la fila deseada
+	 * 
+	 * @param string $val nuevo valor de la columna
+	 * 
+	 * @param string $oper valor definido para eloperador de la comparacion, es = por defecto
+	 * 
+	 * @method update($tabla, $columna, $id, $val, $oper = '=') el metodo se usa para actualizar datos de una columna definida previamente
+	 * 
+	 * @method update($tabla, $columna, $id, $val) el metodo se usa para actualizar datos de una columna definida previamente
+	 * 
+	 */
+
 	public function update($tabla, $columna, $id, $val, $oper = '='){
 		$q = $this->consultaSQL("UPDATE $tabla SET $columna = '$val' WHERE id $oper $id");
 	}
 
+	/**
+	 * 
+	 * @param string $tabla es la tabla principal, la cual funciona como base para la union
+	 * 
+	 * @param string $columna columnas que se desean unir
+	 * 
+	 * @param string $unirCon tabla secundaria de la union
+	 * 
+	 * @param string $condicionante columna usada como indice o indicador en la condicion
+	 * 
+	 * @param string $condicion valor a buscar para realizar el emparejamiento y finalizar la union
+	 * 
+	 * @method innerJoin($tabla, $columnas, $unirCon, $condicionante, $condicion) metodo usado para optener tablas unidas por un elemento en comun
+	 * 
+	 * @return PDO tablas unidas
+	 */
+
 	public function innerJoin($tabla, $columnas, $unirCon, $condicionante, $condicion){
-		$q = $this->consultaSQL("SELECT $columnas FROM $tabla INNER JOIN $unirCon ON $condicionante = $condicion");
+		return $this->consultaSQL("SELECT $columnas FROM $tabla INNER JOIN $unirCon ON $condicionante = $condicion");
 	}
 
 	/**
-	 * @param $tabla
+	 * 
+	 * @param string $tabla es la tabla principal, la cual funciona como base para la union
+	 * 
+	 * @param string $columna columnas que se desean unir
+	 * 
+	 * @param string $unirCon tabla secundaria de la union
+	 * 
+	 * @param string $condicionante columna usada como indice o indicador en la condicion, normamente es la llave primaria
+	 * 
+	 * @param string $condicion valor a buscar para realizar el emparejamiento y finalizar la union
+	 * 
+	 * @param string $condicionadoW condicionante o columna de condion del where
+	 * 
+	 * @param string $condicionW valor o condicion del where
+	 * 
+	 * @param string $oper valor definido para eloperador de la comparacion, es = por defecto
+	 * 
+	 * @method function innerJoinConWhere($tabla, $columnas, $unirCon, $condicionante, $condicion, $condicionW, $condicionadoW, $oper = '=') metodo usado para unir tablas con un where añadido para optener datos más precisos
+	 * 
+	 * @method function innerJoinConWhere($tabla, $columnas, $unirCon, $condicionante, $condicion, $condicionW, $condicionadoW) metodo usado para unir tablas con un where añadido para optener datos más precisos
+	 * 
 	 */
 
 	public function innerJoinConWhere($tabla, $columnas, $unirCon, $condicionante, $condicion, $condicionW, $condicionadoW, $oper = '='){
-		$q = $this->consultaSQL("SELECT $columnas FROM $tabla INNER JOIN $unirCon ON $condicionante = $condicion WHERE $condicionW $oper $condicionadoW");
+		return $this->consultaSQL("SELECT $columnas FROM $tabla INNER JOIN $unirCon ON $condicionante = $condicion WHERE $condicionW $oper $condicionadoW");
 	}
 
 }
