@@ -40,7 +40,6 @@ require("../serve.php");
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>entradas">Ingresados</a></li>
-							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>salientes">Salientes</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>stock">En stock</a></li>	
 						</ul>
 					</li>
@@ -49,8 +48,9 @@ require("../serve.php");
 							Factura
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
-							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>factura">Nueva factura</a></li>
-							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>ventas">Ventas diarias</a></li>	
+							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>facturas">Facturas</a></li>
+							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>insertar/factura">Nueva Factura</a></li>
+							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>ventas">Ventas diarias</a></li>	
 						</ul>
 					</li>
 					<li class="nav-item ">

@@ -48,10 +48,13 @@ function menu(){
                     <h1 class="display-4 text-center">Facturacion</h1>
                     <div class="card border-secondary">
                         <div class="d-grid gap-4 py-2 px-4">
-                            <a href="<?=$_ENV['PAGE_SERVE']?>menu" class="btn btn-outline-dark disabled">Nueva Factura</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>facturas" class="btn btn-outline-dark">Facturas</a>
                         </div>
                         <div class="d-grid gap-4 py-2 px-4">
-                            <a href="<?=$_ENV['PAGE_SERVE']?>menu" class="btn btn-outline-dark disabled">Ventas Diarias</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>insertar/factura" class="btn btn-outline-dark">Nueva Factura</a>
+                        </div>
+                        <div class="d-grid gap-4 py-2 px-4">
+                            <a href="<?=$_ENV['PAGE_SERVE']?>ventas" class="btn btn-outline-dark">Ventas Diarias</a>
                         </div>
                     </div>
                 </div>

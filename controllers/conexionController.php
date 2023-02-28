@@ -10,8 +10,15 @@ try {
  * @KEVAO18
  */
 class conexionController {
+
     public function __construct(){
     }
+
+	/**
+	 * 
+	 * 
+	 * 
+	 */
 
     public function conect()
     {

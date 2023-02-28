@@ -84,11 +84,6 @@ class routesController{
                 stock();
                 break;
 
-            case "salientes":
-                include_once '../web/productos/'.$ruta[0].'.php';
-                //salientes();
-                break;
-
             case "entradas":
                 include_once '../web/productos/'.$ruta[0].'.php';
                 entradas();
@@ -102,6 +97,11 @@ class routesController{
             case 'facturas':
                 include_once '../web/facturas/'.$ruta[0].'.php';
                 facturas();
+                break;
+
+            case 'factura':
+                include_once '../web/facturas/'.$ruta[0].'.php';
+                factura($ruta[1]);
                 break;
 
             case "e403":

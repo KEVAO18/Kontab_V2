@@ -43,7 +43,32 @@ class facturas extends sqlController{
         return $this->datos->where('facturas', 'id', $id);
     }
 
-    //facturas.id, facturas.cliente, clientes.nombre, clientes.direccion, clientes.ciudad, clientes.telefono, clientes.correo
+    public function innerJoinF($id){
+        return $this->datos->innerJoinConWhere(
+            "facturas", 
+            "
+                facturas.id, 
+                facturas.fechaEntrega, 
+                facturas.fechaVencimiento, 
+                facturas.tipoPago, 
+                facturas.subtotal, 
+                facturas.total, 
+                facturas.observaciones, 
+                facturas.estado, 
+                facturas.cliente, 
+                clientes.nombre, 
+                clientes.direccion, 
+                clientes.ciudad, 
+                clientes.telefono, 
+                clientes.correo
+            ", 
+            "clientes", 
+            "facturas.cliente", 
+            "clientes.documento",
+            "facturas.id", 
+            $id
+        );
+    }
 
 }
 

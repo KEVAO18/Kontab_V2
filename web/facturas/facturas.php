@@ -15,20 +15,10 @@ function facturas(){
     ?>
 
     <section>
-        <article class="card p-4" id="insert-form">
-            <form action="" method="post">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text" id="codigoLabel">Codigo de factura</span>
-                            <input type="text" class="form-control" maxlength="6" id="codigo" aria-describedby="codigoLabel" name="codigo">
-                        </div>
-                    </div>
-                </div>
-                <div class="d-grid gap-4">
-                    <button type="submit" class="btn btn-outline-dark">Buscar factura</button>
-                </div>
-            </form>
+        <article class="card p-4">
+            <div class="d-grid gap-4 py-2 px-4">
+                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/factura" class="btn btn-outline-dark">Nueva factura</a>
+            </div>
         </article>
         <hr>
         <article class="py-2" id="total-table">
@@ -37,25 +27,34 @@ function facturas(){
                     <tr>
                         <th scope="id">#</th>
                         <th scope="documento">Documento</th>
-                        <th scope="nombre">Nombre</th>
-                        <th scope="direccion">Direccion</th>
-                        <th scope="ciudad">Ciudad</th>
-                        <th scope="telefono">Telefono</th>
-                        <th scope="correo">Correo</th>
+                        <th scope="generacion">Generacion</th>
+                        <th scope="vencimiento">Vencimiento</th>
+                        <th scope="tipo">Tipo de pago</th>
+                        <th scope="subtotal">Sub-Total</th>
+                        <th scope="total">Total</th>
+                        <th scope="observaciones">Observaciones</th>
+                        <th scope="acciones">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
                         foreach ($datos as $d) {
-                            ?>
+                            $color = ($d['estado'] == 1) ? "bg-success" : "bg-danger" ;
+                            $tipoPago = ($d['tipoPago'] == 0) ? "Contado" : "Credito" ;
+                    ?>
                     <tr>
-                        <td><?=$d['id']?></td>
+                        <td class="<?=$color?> text-light"><?=$d['id']?></td>
                         <td><?=$d['cliente']?></td>
-                        <td></td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>1</td>
+                        <td><?=$d['fechaEntrega']?></td>
+                        <td><?=$d['fechaVencimiento']?></td>
+                        <td><?=$tipoPago?></td>
+                        <td><?=$d['subtotal']?></td>
+                        <td><?=$d['total']?></td>
+                        <td><?=$d['observaciones']?></td>
+                        <td>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>factura/<?=$d['id']?>" class="btn btn-outline-info">Mas</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/eliminar.php?id=<?=$d['id']?>" class="btn btn-outline-danger">Eliminar</a>
+                        </td>
                     </tr>
                             <?php
                         }
