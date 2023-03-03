@@ -3,7 +3,7 @@
 try {
     @require_once ('../controllers/sqlController.php');
 } catch (\Throwable $th) {
-    @require_once ('../../controllers/sqlController.php');
+    @require_once ('../../../controllers/sqlController.php');
 }
 
 /**

@@ -3,7 +3,11 @@
 try {
 	require_once('../serve.php');
 } catch (\Throwable $th) {
-	require_once('../../serve.php');
+	try {
+		require_once('../../serve.php');
+	} catch (\Throwable $th) {
+		require_once('../../../serve.php');
+	}
 }
 
 /**

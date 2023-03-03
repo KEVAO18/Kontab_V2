@@ -29,7 +29,7 @@ function entradas(){
                 <div class="row">
                     <div class="col-md-6">
                         <div class="input-group mb-3">
-                            <select class="form-select" aria-label="id" name="id">
+                        <select class="form-select" aria-label="id" name="id">
                                 <?php
                             foreach ($prods as $p) {
                                 ?>

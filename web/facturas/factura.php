@@ -6,28 +6,39 @@
  * @return void
  */
 function factura($id){
-    require_once('../handlers/facturas/facturas.php');
-    require_once('../handlers/facturas/ventas.php');
 
+    // llamado a los handlers
+    require_once('../handlers/facturas/facturas.php');
+    require_once('../handlers/facturas/ventas/ventas.php');
+    require_once('../handlers/productos/productos.php');
+
+    // declaracion de objetos de las claces handler
     $facturas = new facturas();
 
     $ventas = new ventas();
 
-    $datos = $ventas->innerJoinP($id);
+    $productos = new productos();
 
-    $cliente_facturado = $facturas->innerJoinF($id);
+    // manipulando la base de datos mediante los handlers
+    $datos = $ventas->innerJoinP($id); // manejo de ventas uniendo las tablas ventas, productos y facturas
 
-    $acum = 0;
+    $cliente_facturado = $facturas->innerJoinF($id); // manejo de facturas uniendo las tablas facturas y clientes
+
+    $producto = $productos->allColums(); // manejo de la tabla productos
+
+    // variables de control
+    $acum = 0; // acumulador del total a pagar
+    $cont = 0; // contador de productos facturados
 
     ?>
 
     <section>
         <article class="card p-4">
             <?php
-            
+            // bucle de la factura
             foreach ($cliente_facturado as $cf ) {
 
-                $tipoPago = ($cf['tipoPago'] == 0) ? "Contado" : "Credito" ;
+                $tipoPago = ($cf['tipoPago'] == 0) ? "Contado" : "Credito" ; // tipos de pago
 
                 ?>
                 
@@ -36,8 +47,12 @@ function factura($id){
                         <img src="<?=$_ENV['FOLDER_IMAGES']?>/logo.png" class="logo" alt="logo">
                     </div>
                 </div>
+
                 <hr>
+
                 <div class="row pt-2">
+
+                    <!-- datos del cliente -->
                     <div class="col-md-7 card">
                         <br>
                         <table class="w-100">
@@ -59,7 +74,11 @@ function factura($id){
                             </tr>
                         </table>
                     </div>
+
+                    <!-- separador -->
                     <div class="col-md-1"></div>
+
+                    <!-- datos de la factura -->
                     <div class="col-md-4 card">
                         <p class="display-factura text-center"><span><?=$cf['id']?></span></p>
                         <hr>
@@ -78,11 +97,16 @@ function factura($id){
                             </tr>
                         </table>
                     </div>
+
                 </div>
+
                 <hr>
+
+                <!-- productos facturados -->
                 <table class="table">
                     <thead>
                         <tr>
+                        <th>Id</th>
                         <th scope="col">Codigo</th>
                         <th scope="col">Producto</th>
                         <th scope="col">cantidad</th>
@@ -92,27 +116,65 @@ function factura($id){
                     </thead>
                     <tbody>
                         <?php
+
+            //bucle de la lista de productos
             foreach ($datos as $d) {
-                $precioTot = $d['precio'] * $d['unidades'];
-                $acum += $precioTot;
+
+                $precioTot = $d['precio'] * $d['unidades']; //precio total = precio a pagar * total de unidades por cada referencia de producto
+
+                $acum += $precioTot; //acumulador del precio total de productos
+                $cont += 1; // contador de productos facturados
                         ?>
+
                         <tr>
+                            <td><?=$cont?></td>
                             <td><?=$d['codigoP']?></td>
                             <td><?=$d['producto']?></td>
                             <td><?=$d['unidades']?></td>
                             <td><?=$d['precio']?></td>
                             <td><?=$precioTot?></td>
                         </tr>
-
                         <?php
             }
                         ?>
+                        <tr>
+                            <!-- formulario de productos -->
+                            <form action="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/ventas/insertar.php" method="post">
+                                <input type="hidden" name="idFactura" value="<?=$id?>">
+                                <td>#</td>
+                                <td></td>
+                                <td>
+                                    <select class="form-select" aria-label="id" name="prod">
+                                            <?php
+                                        foreach ($producto as $p) {
+                                            ?>
+                                        <option value="<?=$p['nombre']."-".$p['id']?>"><?=$p['nombre']." - ".$p['id']?></option>
+                                        <?php
+                                        }
+                                        ?>
+                                    </select>
+                                </td>
+                                <td>
+                                    <div class="input-group mb-3">
+                                        <span class="input-group-text" id="cantLabel" for="cantidad">Cantidad</span>
+                                        <input type="number" class="form-control" maxlength="6" id="cantidad" aria-describedby="cantLabel" name="cantidad">
+                                    </div>
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-outline-success">Añadir a la afctura</button>
+                                </td>
+                                <td></td>
+                            </form>
+                        </tr>
                     </tbody>
                 </table>
+
                 <hr>
                 
-                <hr>
+                <!-- otros datos -->
                 <div class="row pt-2">
+                    
+                    <!-- datos del envio -->
                     <div class="col-md-7 card">
                         <br>
                         <table class="w-100 text-center">
@@ -133,7 +195,11 @@ function factura($id){
                             </tr>
                         </table>
                     </div>
+
+                    <!-- separador -->
                     <div class="col-md-1"></div>
+
+                    <!-- datos del pago -->
                     <div class="col-md-4 card justify-content-center">
                         <table class="w-100 justify-content-center">
                             <tr class="">
@@ -142,11 +208,11 @@ function factura($id){
                             </tr>
                         </table>
                     </div>
+                    
                 </div>
                 
                 <?php
-            }
-
+            }// final del bucle de la factura
             ?>
         </article>
     </section>
