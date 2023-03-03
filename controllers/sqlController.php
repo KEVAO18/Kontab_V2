@@ -172,7 +172,7 @@ class sqlController extends conexionController{
 	 * 
 	 * @param string $tabla es la tabla principal, la cual funciona como base para la union
 	 * 
-	 * @param string $columna columnas que se desean unir
+	 * @param string $columnas columnas que se desean unir
 	 * 
 	 * @param string $unirCon tabla secundaria de la union
 	 * 
@@ -193,7 +193,7 @@ class sqlController extends conexionController{
 	 * 
 	 * @param string $tabla es la tabla principal, la cual funciona como base para la union
 	 * 
-	 * @param string $columna columnas que se desean unir
+	 * @param string $columnas columnas que se desean unir
 	 * 
 	 * @param string $unirCon tabla secundaria de la union
 	 * 
@@ -215,6 +215,40 @@ class sqlController extends conexionController{
 
 	public function innerJoinConWhere($tabla, $columnas, $unirCon, $condicionante, $condicion, $condicionW, $condicionadoW, $oper = '='){
 		return $this->consultaSQL("SELECT $columnas FROM $tabla INNER JOIN $unirCon ON $condicionante = $condicion WHERE $condicionW $oper $condicionadoW");
+	}
+
+	/**
+	 * 
+	 * @param string $tabla es la tabla principal, la cual funciona como base para la union
+	 * 
+	 * @param string $columnas columnas que se desean unir
+	 * 
+	 * @param string $unirCon tabla secundaria de la union
+	 * 
+	 * @param string $unirCon2 tabla tercearia de la union
+	 * 
+	 * @param string $condicionante columna usada como indice o indicador en la condicion, normamente es la llave primaria
+	 * 
+	 * @param string $condicionante2 columna usada como indice o indicador en la segunda condicion, normamente es la llave primaria
+	 * 
+	 * @param string $condicion valor a buscar para realizar el emparejamiento y finalizar la union
+	 * 
+	 * @param string $condicion2 segundo valor a buscar para realizar el emparejamiento y finalizar la union
+	 * 
+	 * @param string $condicionadoW condicionante o columna de condion del where
+	 * 
+	 * @param string $condicionW valor o condicion del where
+	 * 
+	 * @param string $oper valor definido para eloperador de la comparacion, es = por defecto
+	 * 
+	 * @method function innerJoinConWhere($tabla, $columnas, $unirCon, $unirCon2, $condicionante, $condicionante2, $condicion, $condicion2, $condicionW, $condicionadoW, $oper = '=') metodo usado para unir tablas con un where añadido para optener datos más precisos
+	 * 
+	 * @method function innerJoinConDoble($tabla, $columnas, $unirCon, $unirCon2, $condicionante, $condicionante2, $condicion, $condicion2, $condicionW, $condicionadoW) metodo usado para unir tablas con un where añadido para optener datos más precisos
+	 * 
+	 */
+
+	public function innerJoinConDoble ($tabla, $columnas, $unirCon, $unirCon2, $condicionante, $condicionante2, $condicion, $condicion2, $condicionW, $condicionadoW, $oper = '='){
+		return $this->consultaSQL("SELECT $columnas FROM $tabla INNER JOIN $unirCon ON $condicionante = $condicion INNER JOIN $unirCon2 ON $condicionante2 = $condicion2 WHERE $condicionW $oper $condicionadoW");
 	}
 
 }
