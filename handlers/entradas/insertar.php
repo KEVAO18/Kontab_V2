@@ -27,7 +27,7 @@ require_once ('../productos/productos.php');
 
         $nombre = $prod['nombre'];
 
-        $cant += $prod['stock']; 
+        $cant = $prod['stock']; 
 
     }
 

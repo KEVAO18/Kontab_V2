@@ -3,7 +3,11 @@
 try {
     @require_once ('../controllers/sqlController.php');
 } catch (\Throwable $th) {
-    @require_once ('../../controllers/sqlController.php');
+    try {
+        @require_once ('../controllers/sqlController.php');
+    } catch (\Throwable $th) {
+        @require_once ('../../../controllers/sqlController.php');
+    }
 }
 
 /**
@@ -20,7 +24,7 @@ class entradas extends sqlController{
     }
 
     public function allColums(){
-        return $this->datos->All('entradas');//102 01 18
+        return $this->datos->All('entradas');
     }
 
     public function insertarDatos($id, $nombre, $cant){

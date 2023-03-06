@@ -3,7 +3,11 @@
 try {
     @require_once ('../controllers/sqlController.php');
 } catch (\Throwable $th) {
-    @require_once ('../../../controllers/sqlController.php');
+    try {
+        @require_once ('../controllers/sqlController.php');
+    } catch (\Throwable $th) {
+        @require_once ('../../../controllers/sqlController.php');
+    }
 }
 
 /**
@@ -23,11 +27,11 @@ class ventas extends sqlController{
         return $this->datos->All('ventas');
     }
 
-    public function insertarDatos($id, $codigoF, $codigoP, $prod, $unidades){
+    public function insertarDatos($codigoF, $codigoP, $prod, $unidades){
         $this->datos->insert(
             'ventas', 
             'id, codigoF, codigoP, producto, unidades', 
-            $id.", '".$codigoF."', '".$codigoP."', '".$prod."', ".$unidades
+            "NULL, '".$codigoF."', '".$codigoP."', '".$prod."', ".$unidades
         );
     }
 
