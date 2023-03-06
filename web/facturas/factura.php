@@ -27,7 +27,6 @@ function factura($id){
     $producto = $productos->allColums(); // manejo de la tabla productos
 
     // variables de control
-    $acum = 0; // acumulador del total a pagar
     $cont = 0; // contador de productos facturados
 
     ?>
@@ -112,6 +111,7 @@ function factura($id){
                         <th scope="col">cantidad</th>
                         <th scope="col">Precio Unitario</th>
                         <th scope="col">Precio Total</th>
+                        <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -122,7 +122,6 @@ function factura($id){
 
                 $precioTot = $d['precio'] * $d['unidades']; //precio total = precio a pagar * total de unidades por cada referencia de producto
 
-                $acum += $precioTot; //acumulador del precio total de productos
                 $cont += 1; // contador de productos facturados
                         ?>
 
@@ -133,6 +132,7 @@ function factura($id){
                             <td><?=$d['unidades']?></td>
                             <td><?=$d['precio']?></td>
                             <td><?=$precioTot?></td>
+                            <td><a href="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/ventas/eliminar.php?id=<?=$d['id']."&idFactura=".$id?>" class="btn btn-outline-danger">Eliminar</a></td>
                         </tr>
                         <?php
             }
@@ -160,8 +160,10 @@ function factura($id){
                                         <input type="number" class="form-control" maxlength="6" id="cantidad" aria-describedby="cantLabel" name="cantidad">
                                     </div>
                                 </td>
-                                <td>
-                                    <button type="submit" class="btn btn-outline-success">Añadir a la afctura</button>
+                                <td colspan="2">
+                                    <div class="d-grid gap-4 py-2 px-4">
+                                        <button type="submit" class="btn btn-outline-success">Añadir a la afctura</button>
+                                    </div>
                                 </td>
                                 <td></td>
                             </form>
@@ -204,7 +206,7 @@ function factura($id){
                         <table class="w-100 justify-content-center">
                             <tr class="">
                                 <td class="display-6">Total</td>
-                                <td class="text-end py-2 display-6"><?=$acum?></td>
+                                <td class="text-end py-2 display-6"><?=$cf['total']?></td>
                             </tr>
                         </table>
                     </div>
