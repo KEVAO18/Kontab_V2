@@ -4,7 +4,7 @@ try {
     @require_once ('../controllers/sqlController.php');
 } catch (\Throwable $th) {
     try {
-        @require_once ('../controllers/sqlController.php');
+        @require_once ('../../controllers/sqlController.php');
     } catch (\Throwable $th) {
         @require_once ('../../../controllers/sqlController.php');
     }
@@ -27,11 +27,11 @@ class facturas extends sqlController{
         return $this->datos->All('facturas');
     }
 
-    public function insertarDatos($id, $nombre, $precio, $stock){
+    public function insertarDatos($id, $cliente, $fechaE, $fechaV, $tipo, $subT, $total, $obser, $estado){
         $this->datos->insert(
             'facturas', 
-            'id, nombre, precio, stock', 
-            "'".$id."', '".$nombre."', ".$precio.", ".$stock
+            'id, cliente, fechaEntrega, fechaVencimiento, tipoPago, subtotal, total, observaciones, estado', 
+            "'".$id."', '".$cliente."', ".$fechaE.", ".$fechaV.", ".$tipo.", ".$subT.", ".$total.", ".$obser.", ".$estado
         );
     }
 

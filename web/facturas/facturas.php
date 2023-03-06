@@ -17,7 +17,7 @@ function facturas(){
     <section>
         <article class="card p-4">
             <div class="d-grid gap-4 py-2 px-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>insertar/factura" class="btn btn-outline-dark">Nueva factura</a>
+                <a href="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/insertar.php" class="btn btn-outline-dark">Nueva factura</a>
             </div>
         </article>
         <hr>
