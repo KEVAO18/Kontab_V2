@@ -251,6 +251,10 @@ class sqlController extends conexionController{
 		return $this->consultaSQL("SELECT $columnas FROM $tabla INNER JOIN $unirCon ON $condicionante = $condicion INNER JOIN $unirCon2 ON $condicionante2 = $condicion2 WHERE $condicionW $oper $condicionadoW");
 	}
 
+	public function LastRow($tabla, $ordenamiento, $columnas){
+		return $this->consultaSQL('SELECT $columnas FROM $tabla ORDER BY $ordenamiento DESC LIMIT 1');
+	}
+
 }
 
 ?>

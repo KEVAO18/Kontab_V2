@@ -74,6 +74,14 @@ class facturas extends sqlController{
         );
     }
 
+    public function contarFacturas($ordenamiento, $columnas){
+        return $this->datos->LastRow(
+            'facturas',
+            $ordenamiento,
+            $columnas
+        );
+    }
+
 }
 
 

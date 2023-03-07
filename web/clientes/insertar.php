@@ -67,6 +67,7 @@ function insertar(){
                     <option value="0">Sin pendientes</option>
                     <option value="1">Con pendientes</option>
                 </select>
+                <hr>
                 <div class="d-grid gap-4">
                     <button type="submit" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</button>
                 </div>

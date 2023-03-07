@@ -12,13 +12,16 @@ function facturas(){
 
     $datos = $facturas->allColums();
 
+    $fc = $facturas->contarFacturas();
+
     ?>
 
     <section>
         <article class="card p-4">
-            <div class="d-grid gap-4 py-2 px-4">
-                <a href="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/insertar.php" class="btn btn-outline-dark">Nueva factura</a>
-            </div>
+            <form action="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/insertar.php" method="post">
+                <!-- id, cliente, fechaEntrega, fechaVencimiento, tipoPago, subtotal, total, observaciones, estado -->
+
+            </form>
         </article>
         <hr>
         <article class="py-2" id="total-table">
