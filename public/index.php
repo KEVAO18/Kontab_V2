@@ -31,7 +31,6 @@ require("../serve.php");
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>ingresos">Ingresos</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>egresos">Egresos</a></li>
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>totales">Totales</a></li>
-							<li><a class="dropdown-item disabled" href="<?=$_ENV['PAGE_SERVE']?>cobros">Cuentas por cobrar</a></li>
 						</ul>
 					</li>
 					<li class="nav-item dropdown">
@@ -49,8 +48,7 @@ require("../serve.php");
 						</button>
 						<ul class="dropdown-menu dropdown-menu-dark">
 							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>facturas">Facturas</a></li>
-							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>insertar/factura">Nueva Factura</a></li>
-							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>ventas">Ventas diarias</a></li>	
+							<li><a class="dropdown-item" href="<?=$_ENV['PAGE_SERVE']?>ventas">Ventas diarias</a></li>
 						</ul>
 					</li>
 					<li class="nav-item ">

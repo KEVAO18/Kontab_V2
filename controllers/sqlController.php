@@ -252,7 +252,7 @@ class sqlController extends conexionController{
 	}
 
 	public function LastRow($tabla, $ordenamiento, $columnas){
-		return $this->consultaSQL('SELECT $columnas FROM $tabla ORDER BY $ordenamiento DESC LIMIT 1');
+		return $this->consultaSQL("SELECT $columnas FROM $tabla ORDER BY $ordenamiento DESC LIMIT 1");
 	}
 
 }

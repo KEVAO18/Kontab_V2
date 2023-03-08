@@ -31,7 +31,7 @@ class facturas extends sqlController{
         $this->datos->insert(
             'facturas', 
             'id, cliente, fechaEntrega, fechaVencimiento, tipoPago, subtotal, total, observaciones, estado', 
-            "'".$id."', '".$cliente."', ".$fechaE.", ".$fechaV.", ".$tipo.", ".$subT.", ".$total.", ".$obser.", ".$estado
+            "'".$id."', '".$cliente."', '".$fechaE."', '".$fechaV."', ".$tipo.", ".$subT.", ".$total.", '".$obser."', ".$estado
         );
     }
 
@@ -74,7 +74,7 @@ class facturas extends sqlController{
         );
     }
 
-    public function contarFacturas($ordenamiento, $columnas){
+    public function ultimaFactura($ordenamiento, $columnas){
         return $this->datos->LastRow(
             'facturas',
             $ordenamiento,

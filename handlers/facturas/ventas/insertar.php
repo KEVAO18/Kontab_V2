@@ -31,22 +31,23 @@ if ($_POST['cantidad'] > 0) {
 
     foreach ($producto->onlyOne($split[1]) as $s) {
 
-        foreach ($factura->onlyOne($_POST['idFactura']) as $fa) {
-
-            $total = $_POST['cantidad'] * $s['precio'];
-
-            $total += $fa['total'];
-
-        }
-
-        //actualizacion del total y el subtotal
-        $factura->actualizarDatos("total", $_POST['idFactura'], $total);
-        $factura->actualizarDatos("subtotal", $_POST['idFactura'], $total);
-        
         //condicion para controlar la resta de productos del stock
         $stock = $s['stock'];
 
         if ($stock >= $_POST['cantidad']) {
+            
+            foreach ($factura->onlyOne($_POST['idFactura']) as $fa) {
+
+                $total = $_POST['cantidad'] * $s['precio'];
+    
+                $total += $fa['total'];
+    
+            }
+    
+            //actualizacion del total y el subtotal
+            $factura->actualizarDatos("total", $_POST['idFactura'], $total);
+            $factura->actualizarDatos("subtotal", $_POST['idFactura'], $total);
+
             $stock -= $_POST['cantidad'];
 
             //actualizacion del stock

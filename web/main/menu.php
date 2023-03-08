@@ -51,9 +51,6 @@ function menu(){
                             <a href="<?=$_ENV['PAGE_SERVE']?>facturas" class="btn btn-outline-dark">Facturas</a>
                         </div>
                         <div class="d-grid gap-4 py-2 px-4">
-                            <a href="<?=$_ENV['PAGE_SERVE']?>insertar/factura" class="btn btn-outline-dark">Nueva Factura</a>
-                        </div>
-                        <div class="d-grid gap-4 py-2 px-4">
                             <a href="<?=$_ENV['PAGE_SERVE']?>ventas" class="btn btn-outline-dark">Ventas Diarias</a>
                         </div>
                     </div>

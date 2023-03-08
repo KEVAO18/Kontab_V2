@@ -6,21 +6,70 @@
  * @return void
  */
 function facturas(){
+    
     require_once('../handlers/facturas/facturas.php');
+    require_once('../handlers/clientes/clientes.php');
 
     $facturas = new facturas();
 
+    $clientes = new clientes();
+
     $datos = $facturas->allColums();
 
-    $fc = $facturas->contarFacturas();
+    $datosClientes = $clientes->allColums();
+
+    $newId = 100001;
 
     ?>
 
     <section>
         <article class="card p-4">
             <form action="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/insertar.php" method="post">
-                <!-- id, cliente, fechaEntrega, fechaVencimiento, tipoPago, subtotal, total, observaciones, estado -->
+                <?php
+                
+                foreach ($facturas->ultimaFactura('id', 'id') as $lastF) {
+                    $newId = $lastF['id']+1;
+                }
+                ?>
+                <input type="hidden" value="<?=$newId?>" name="idF">
 
+                <div class="row">
+                    <div class="col-md-6">
+                        <select class="form-select" aria-label="estado" name="cliente">
+                <?php
+                    foreach ($datosClientes as $cliente) {
+                ?>
+                            <option value="<?=$cliente['documento']?>"><?=$cliente['nombre']?> - <?=$cliente['documento']?></option>
+                <?php
+                    }
+                ?>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <select class="form-select" aria-label="estado" name="tipo">
+                            <option value="0">Contado</option>
+                            <option value="1">A Credito</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row pt-3">
+                    <div class="col-md-6">
+                        <select class="form-select" aria-label="estado" name="fechaV">
+                            <option value="0">Sin plazos</option>
+                            <option value="15">A 15 Dias</option>
+                            <option value="30">A 30 Dias</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="observacionLabel" for="observacion">Observaciones</span>
+                            <input type="text" class="form-control" maxlength="150" id="observacion" aria-describedby="observacionLabel" name="observacion" placeholder="Maximo de caracteres: 150">
+                        </div>
+                    </div>
+                </div>
+                <div class="d-grid gap-4">
+                    <button type="submit" class="btn btn-outline-dark">Ingresar nueva factura</button>
+                </div>
             </form>
         </article>
         <hr>
@@ -28,15 +77,15 @@ function facturas(){
             <table class="table">
                 <thead>
                     <tr>
-                        <th scope="id">#</th>
-                        <th scope="documento">Documento</th>
-                        <th scope="generacion">Generacion</th>
-                        <th scope="vencimiento">Vencimiento</th>
-                        <th scope="tipo">Tipo de pago</th>
-                        <th scope="subtotal">Sub-Total</th>
-                        <th scope="total">Total</th>
-                        <th scope="observaciones">Observaciones</th>
-                        <th scope="acciones">Acciones</th>
+                        <th scope="id" class="text-center">#</th>
+                        <th scope="documento" class="text-center">Documento</th>
+                        <th scope="generacion" class="text-center">Generacion</th>
+                        <th scope="vencimiento" class="text-center">Finalizacion del pago</th>
+                        <th scope="tipo" class="text-center">Tipo de pago</th>
+                        <th scope="subtotal" class="text-center">Sub-Total</th>
+                        <th scope="total" class="text-center">Total</th>
+                        <th scope="observaciones" class="text-center">Observaciones</th>
+                        <th scope="acciones" class="text-center">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,5 +117,3 @@ function facturas(){
     </section>
     <?php
 }
-
-?>
