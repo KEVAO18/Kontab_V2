@@ -10,6 +10,8 @@ require_once ('productos.php');
 
     $productos = new productos();
     
+    $productos->actualizarDatos('id ', "'".$_POST['lastId']."'", $_POST['id']);
+
     $productos->actualizarDatos('nombre ', "'".$_POST['lastId']."'", $_POST['nombre']);
     
     $productos->actualizarDatos('precio', "'".$_POST['lastId']."'", $_POST['precio']);

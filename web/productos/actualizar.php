@@ -23,7 +23,13 @@ function actualizar($id){
                 foreach ($datos as $d) {
                 ?>
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-4">
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="idLabel">Id</span>
+                            <input type="text" class="form-control" maxlength="100" id="id" aria-describedby="idLabel" name="id" value="<?=$d['id']?>">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="nombreLabel">Nombre</span>
                             <input type="text" class="form-control" maxlength="100" id="nombre" aria-describedby="nombreLabel" name="nombre" value="<?=$d['nombre']?>">
