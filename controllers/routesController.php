@@ -104,6 +104,11 @@ class routesController{
                 factura($ruta[1]);
                 break;
 
+            case 'ventas':
+                include_once '../web/facturas/'.$ruta[0].'.php';
+                ventas();
+                break;
+
             case "e403":
                 echo $ruta[0];
                 break;

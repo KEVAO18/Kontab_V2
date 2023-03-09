@@ -104,8 +104,9 @@ function facturas(){
                         <td><?=$d['total']?></td>
                         <td><?=$d['observaciones']?></td>
                         <td>
-                            <a href="<?=$_ENV['PAGE_SERVE']?>factura/<?=$d['id']?>" class="btn btn-outline-info">Mas</a>
-                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/eliminar.php?id=<?=$d['id']?>" class="btn btn-outline-danger">Eliminar</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>factura/<?=$d['id']?>" class="btn btn-outline-info btn-sm">Mas</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/cambiar.php?id=<?=$d['id']."&doc=".$d['cliente']?>" class="btn btn-outline-success btn-sm">Estado</a>
+                            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/facturas/eliminar.php?id=<?=$d['id']?>" class="btn btn-outline-danger btn-sm">Eliminar</a>
                         </td>
                     </tr>
                             <?php

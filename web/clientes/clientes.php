@@ -31,7 +31,6 @@ function clientes(){
                         <th scope="ciudad">Ciudad</th>
                         <th scope="telefono">Telefono</th>
                         <th scope="correo">Correo</th>
-                        <th scope="estado">Estado</th>
                         <th scope="acciones">Acciones</th>
                     </tr>
                 </thead>
@@ -39,6 +38,7 @@ function clientes(){
                 <?php
                     foreach ($datos as $data) {
                     $i +=1; 
+                    $estado = ($data['estado'] == 1) ? "<td>Sin Pendientes</td>" : "<td>Pendiente</td>" ;
                 ?>
                     <tr>
                         <td><?=$i?></td>
@@ -48,16 +48,6 @@ function clientes(){
                         <td><?=$data['ciudad']?></td>
                         <td><?=$data['telefono']?></td>
                         <td><?=$data['correo']?></td>
-                        <?php
-                        switch ($data['estado']) {
-                            case '0':
-                                echo "<td>Sin Pendientes</td>";
-                                break;
-                            case '1':
-                                echo "<td>Pendiente</td>";
-                                break;
-                        }
-                        ?>
                         <td>
                             <a href="<?=$_ENV['PAGE_SERVE']?>actualizar/clientes/<?=$data['id']?>" class="btn btn-outline-info">Actualizar</a>
                             <a href="<?=$_ENV['PAGE_SERVE']?>handlers/clientes/eliminar.php?id=<?=$data['id']?>" class="btn btn-outline-danger">Eliminar</a>
