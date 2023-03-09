@@ -19,12 +19,6 @@ $productos = new productos();
 
 $clientes = new clientes();
 
-$contador = 0;
-
-foreach ($facturas->where('facturas', 'cliente', $_GET['doc']) as $f) {
-    $contador += 1;
-}
-
 foreach ($facturas->allColums() as $d) {
 
     foreach ($clientes->allColums() as $c ) {
