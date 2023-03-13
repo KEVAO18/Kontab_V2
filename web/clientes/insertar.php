@@ -38,7 +38,7 @@ function insertar(){
                     <div class="col-md-6">
                         <div class="input-group mb-3">
                             <span class="input-group-text" id="direccionLabel">Direccion</span>
-                            <input type="text" class="form-control" maxlength="13" id="direccion" aria-describedby="direccionLabel" name="direccion">
+                            <input type="text" class="form-control" maxlength="100" id="direccion" aria-describedby="direccionLabel" name="direccion">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -69,7 +69,7 @@ function insertar(){
                 </select>
                 <hr>
                 <div class="d-grid gap-4">
-                    <button type="submit" class="btn btn-outline-dark">Añadir Ingreso Ó Egreso</button>
+                    <button type="submit" class="btn btn-outline-dark">Añadir Nuevo Cliente</button>
                 </div>
             </form>
         </article>

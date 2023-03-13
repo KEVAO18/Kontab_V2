@@ -28,6 +28,7 @@ function factura($id){
 
     // variables de control
     $cont = 0; // contador de productos facturados
+    $acum = 0; // acumulador del total de productos comprados
 
     ?>
 
@@ -123,6 +124,7 @@ function factura($id){
                 $precioTot = $d['precio'] * $d['unidades']; //precio total = precio a pagar * total de unidades por cada referencia de producto
 
                 $cont += 1; // contador de productos facturados
+                $acum += $d['unidades'];
                         ?>
 
                         <tr>
@@ -162,7 +164,7 @@ function factura($id){
                                 </td>
                                 <td colspan="2">
                                     <div class="d-grid gap-4 py-2 px-4">
-                                        <button type="submit" class="btn btn-outline-success">Añadir a la afctura</button>
+                                        <button type="submit" class="btn btn-outline-success">Añadir a la factura</button>
                                     </div>
                                 </td>
                                 <td></td>
@@ -173,27 +175,38 @@ function factura($id){
 
                 <hr>
                 
+                <div class="row py-2">
+                    <div class="col-md-12 card display-factura pt-2">
+                        <div class="">
+                            <h5 class="text-center">Observaciones</h5>
+                            <p class="text-center"><?=$cf['observaciones']?></p>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
                 <!-- otros datos -->
                 <div class="row pt-2">
                     
                     <!-- datos del envio -->
-                    <div class="col-md-7 card">
+                    <div class="col-md-6 card">
                         <br>
                         <table class="w-100 text-center">
                             <tr class="">
-                                <td class="py-2">Enviar a</td>
+                                <td class="py-2">Enviada por: </td>
                             </tr>
                             <tr class="">
-                                <td class="py-2"><?=$cf['cliente']?></td>
+                                <td class="py-2"><?=$_ENV['NEGOCIO_NIT']?></td>
                             </tr>
                             <tr class="">
-                                <td class="py-2"><?=$cf['nombre']?></td>
+                                <td class="py-2"><?=$_ENV['NEGOCIO_NAME']?></td>
                             </tr>
                             <tr class="">
-                                <td class="py-2"><?=$cf['direccion']?></td>
+                                <td class="py-2"><?=$_ENV['NEGOCIO_DIRECCION']?></td>
                             </tr>
                             <tr class="">
-                                <td class="py-2"><?=$cf['telefono']?></td>
+                                <td class="py-2"><?=$_ENV['NEGOCIO_TELEFONO']?></td>
                             </tr>
                         </table>
                     </div>
@@ -202,11 +215,15 @@ function factura($id){
                     <div class="col-md-1"></div>
 
                     <!-- datos del pago -->
-                    <div class="col-md-4 card justify-content-center">
-                        <table class="w-100 justify-content-center">
+                    <div class="col-md-5 card justify-content-end">
+                        <table class="w-100">
+                            <tr class="">
+                                <td class="display-factura">Total de productos</td>
+                                <td class="text-end display-factura py-2"><?=$acum?> unid.</td>
+                            </tr>
                             <tr class="">
                                 <td class="display-6">Total</td>
-                                <td class="text-end py-2 display-6"><?=$cf['total']?></td>
+                                <td class="text-end py-2 display-6">$<?=$cf['total']?></td>
                             </tr>
                         </table>
                     </div>
