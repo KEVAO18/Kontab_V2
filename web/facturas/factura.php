@@ -234,6 +234,9 @@ function factura($id){
             }// final del bucle de la factura
             ?>
         </article>
+        <div class="d-grid gap-4 py-4">
+            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/pdf/facturaToPdf.php?id=<?=$id?>" class="btn btn-outline-danger fw-bold display-factura">Generar Pdf</a>
+        </div>
     </section>
     <?php
 }
