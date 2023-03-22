@@ -50,4 +50,4 @@ foreach ($ventas->onlyOne($_GET['id']) as $venta) {
 $ventas->eliminarDatos('id', $_GET['id']);
 
 //volver a la factura
-header("Location: ../../../factura/".$_GET['idFactura']);
+header("Location: ../../../factura/".$_GET['idFactura']."#prodsTable");

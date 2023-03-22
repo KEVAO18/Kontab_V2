@@ -77,5 +77,5 @@ if ($_POST['cantidad'] > 0) {
 
 }
 
-header("Location: ../../../factura/".$_POST['idFactura']);
+header("Location: ../../../factura/".$_POST['idFactura']."#prodsTable");
 ?>

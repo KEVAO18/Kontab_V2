@@ -103,7 +103,7 @@ function factura($id){
                 <hr>
 
                 <!-- productos facturados -->
-                <table class="table">
+                <table class="table" id="prodsTable">
                     <thead>
                         <tr>
                         <th>Id</th>

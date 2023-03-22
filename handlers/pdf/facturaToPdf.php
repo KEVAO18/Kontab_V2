@@ -485,8 +485,6 @@ ob_start();
 
     ob_clean();
 
-    // echo $datosFactura;
-
     require_once('../../vendor/dompdf/dompdf/src/Dompdf.php');
 
     use Dompdf\Dompdf;
