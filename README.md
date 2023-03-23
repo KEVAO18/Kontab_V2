@@ -10,6 +10,14 @@ Sistema contable creado para empresas pequeñas y medianas que necesitan mantene
     - [Facturación](#facturación)
     - [Registro de Clientes](#registro-de-clientes)
     - [Control de Stock](#control-de-Stock)
+  - [DB](#db)
+    - [Totales](#totales-db)
+    - [Entradas](#entradas-db)
+    - [Productos](#productos-db)
+    - [Clientes](#clientes-db)
+    - [Cobros](#cobros-db)
+    - [Venta](#venta-db)
+    - [Facturas](#facturas-db)
 
 ## Manual de Uso
 
@@ -61,51 +69,52 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
 
 #### DB: 
 
-- ##### Totales
+- ##### Totales DB
 
 | Id   | Tipo | Fecha | Concepto | Monto |
 | :---: | :------: | :--------: | :------: | :-----: |
 | int  | tinyInt | timestamp | varchar | double |
 | 11  | 1 | - | 100 | - |
 
-- ##### Entradas
+- ##### Entradas DB
 
 | Id   | Índice | Nombre | Fecha | Cantidad |
 | :---: | :------: | :--------: | :------: | :-----: |
 | int  | varchar | varchar | timestamp | int |
 | 11  | 10 | 100 | - | 11 |
 
-- ##### Productos
+- ##### Productos DB
 
 |   Id    | Nombre  | Precio | Stock |
 | :-----: | :-----: | :----: | :---: |
 | varchar | varchar | double |  int  |
 |   10    |   100   |   8    |  11   |
 
-- ##### Clientes
+- ##### Clientes DB
 
 |  Id  | Documento | Nombre  | Dirección | Ciudad  | Teléfono | Correo  | Estado  |
 | :--: | :-------: | :-----: | :-------: | :-----: | :------: | :-----: | :-----: |
 | int  |  varchar  | varchar |  varchar  | varchar | varchar  | varchar | tinyInt |
 |  11  |    13     |   100   |    100    |   80    |    50    |   100   |    1    |
 
-- ##### Cobros
+- ##### Cobros DB
 
 |  Id  | CodigoF | Cliente | Recaudo | fechaCobro |
 | :--: | :-----: | :-----: | :-----: | :--------: |
 | int  | varchar | varchar | double  | timestamp  |
 |  11  |    6    |   13    |    -    |     -      |
 
-- ##### Venta
+- ##### Venta DB
 
 |  Id  | CodigoF | CodigoP | Productos | Unidades |
 | :--: | :-----: | :-----: | :-------: | :------: |
 | int  | varchar | varchar |  varchar  |   int    |
 |  11  |    6    |   10    |    100    |    6     |
 
-- ##### Facturas
+- ##### Facturas DB
 
 |   Id    | Cliente | FechaEntrega | FechaVencimiento | TipoPago | Subtotal | Total  | Observaciones | Estado  |
 | :-----: | :-----: | :----------: | :--------------: | :------: | :------: | :----: | :-----------: | :-----: |
 | varchar | varchar |   datetime   |       date       | tinyInt  |  double  | double |     text      | tinyInt |
 |    6    |   13    |      -       |        -         |    4     |    -     |   -    |       -       |    1    |
+
