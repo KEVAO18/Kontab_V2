@@ -58,3 +58,54 @@ Kontab es un sistema contable que pone la organización en tu negocio de una for
 Lo primero será ingresar los clientes al sistema, del cual necesitáremos los datos anteriormente nombrados (Documento, Nombre, Dirección, Ciudad, Teléfono, Correo, Estado), luego los productos que posee la tienda, para este necesitas el id ó código del producto, Nombre del producto y precio del producto y por ultimo ingresar la cantidad que posee la tienda de cada producto (Id o código y cantidad)
 
 Luego de esto ya podrás usar el sistema contable con normalidad ya que sin estos datos el no puede facturar o generar ninguna compra y felicidades, tu sistema contable integrado Kontab versión 2 ya esta funcionando
+
+#### DB: 
+
+- ##### Totales
+
+| Id   | Tipo | Fecha | Concepto | Monto |
+| :---: | :------: | :--------: | :------: | :-----: |
+| int  | tinyInt | timestamp | varchar | double |
+| 11  | 1 | - | 100 | - |
+
+- ##### Entradas
+
+| Id   | Índice | Nombre | Fecha | Cantidad |
+| :---: | :------: | :--------: | :------: | :-----: |
+| int  | varchar | varchar | timestamp | int |
+| 11  | 10 | 100 | - | 11 |
+
+- ##### Productos
+
+|   Id    | Nombre  | Precio | Stock |
+| :-----: | :-----: | :----: | :---: |
+| varchar | varchar | double |  int  |
+|   10    |   100   |   8    |  11   |
+
+- ##### Clientes
+
+|  Id  | Documento | Nombre  | Dirección | Ciudad  | Teléfono | Correo  | Estado  |
+| :--: | :-------: | :-----: | :-------: | :-----: | :------: | :-----: | :-----: |
+| int  |  varchar  | varchar |  varchar  | varchar | varchar  | varchar | tinyInt |
+|  11  |    13     |   100   |    100    |   80    |    50    |   100   |    1    |
+
+- ##### Cobros
+
+|  Id  | CodigoF | Cliente | Recaudo | fechaCobro |
+| :--: | :-----: | :-----: | :-----: | :--------: |
+| int  | varchar | varchar | double  | timestamp  |
+|  11  |    6    |   13    |    -    |     -      |
+
+- ##### Venta
+
+|  Id  | CodigoF | CodigoP | Productos | Unidades |
+| :--: | :-----: | :-----: | :-------: | :------: |
+| int  | varchar | varchar |  varchar  |   int    |
+|  11  |    6    |   10    |    100    |    6     |
+
+- ##### Facturas
+
+|   Id    | Cliente | FechaEntrega | FechaVencimiento | TipoPago | Subtotal | Total  | Observaciones | Estado  |
+| :-----: | :-----: | :----------: | :--------------: | :------: | :------: | :----: | :-----------: | :-----: |
+| varchar | varchar |   datetime   |       date       | tinyInt  |  double  | double |     text      | tinyInt |
+|    6    |   13    |      -       |        -         |    4     |    -     |   -    |       -       |    1    |
