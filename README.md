@@ -23,8 +23,12 @@ Sistema contable creado para empresas pequeñas y medianas que necesitan mantene
 ## Manual de Uso
 
 ### Configuraciones Iniciales
+<<<<<<< HEAD
 
 Para comenzar has un **fork** o descarga nuestra ulyima vercion [aqui](https://github.com/KEVAO18/Kontab_V2/releases/tag/Kontab_Public_re) en nuestro servidor para poder manipularlo y cambiarlo, seguido de esto entraremos a nuestra copia y iniciamos con la configuración:
+=======
+Para comenzar has un **fork** o descarga nuestra ultima version [aqui](https://github.com/KEVAO18/Kontab_V2/releases/tag/Kontab_Public_re) en nuestro servidor para poder manipularlo y cambiarlo, seguido de esto entraremos a nuestra copia y iniciamos con la configuración:
+>>>>>>> 72ea63b88a97bafde895cdeaa8416189b5c6090c
 
 - ingresaremos al archivo .env en el cual se encuentran los principales campos a configurar
 
