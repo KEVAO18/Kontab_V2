@@ -11,14 +11,13 @@ Sistema contable creado para empresas pequeñas y medianas que necesitan mantene
     - [Facturación](#facturación)
     - [Registro de Clientes](#registro-de-clientes)
     - [Control de Stock](#control-de-stock)
-  - [SQL](#sql-tablas)
-    - [Totales](#totales-db)
-    - [Entradas](#entradas-db)
-    - [Productos](#productos-db)
-    - [Clientes](#clientes-db)
-    - [Cobros](#cobros-db)
-    - [Venta](#venta-db)
-    - [Facturas](#facturas-db)
+- [SQL](#sql)
+  - [Base de datos](#base-de-datos)
+  - [Tablas](#tablas)
+  - [Indices](#indices)
+  - [Autoincrementos](#autoincrementos)
+  - [Restricciones](#restricciones)
+  - [Modelos graficos](#modelos-graficos)
   
 ## Manual de Uso
 
@@ -94,16 +93,19 @@ Lo primero será ingresar los clientes al sistema, del cual necesitáremos los d
 
 Luego de esto ya podrás usar el sistema contable con normalidad ya que sin estos datos el no puede facturar o generar ninguna compra y felicidades, tu sistema contable integrado Kontab versión 2 ya esta funcionando
 
-#### sql tablas
+### SQL
 
-- primer paso: crear la base de datos
+- #### base de datos
 
-  ```sql
-    CREATE DATABASE kontabapi;
-  ```
+  - primer paso: crear la base de datos
 
-- luego pasamos a crear las tablas
-  - primero la tabla totales
+    ```sql
+      CREATE DATABASE kontabapi;
+    ```
+
+- #### tablas
+
+  - la tabla totales
 
     ```sql
       CREATE TABLE `kontabapi`.`totales` (
@@ -193,196 +195,196 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
       ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
     ```
 
-### sql indices
+- ### indices
 
-- totales
+  - totales
 
-  ```sql
-    ALTER TABLE `totales`
-      ADD PRIMARY KEY (`id`),
-      ADD KEY `fecha` (`fecha`);
-  ```
+    ```sql
+      ALTER TABLE `totales`
+        ADD PRIMARY KEY (`id`),
+        ADD KEY `fecha` (`fecha`);
+    ```
 
-- entradas
+  - entradas
 
-  ```sql
-    ALTER TABLE `entradas`
-      ADD PRIMARY KEY (`id`) USING BTREE,
-      ADD KEY `nombre` (`nombre`),
-      ADD KEY `indice` (`indice`);
-  ```
+    ```sql
+      ALTER TABLE `entradas`
+        ADD PRIMARY KEY (`id`) USING BTREE,
+        ADD KEY `nombre` (`nombre`),
+        ADD KEY `indice` (`indice`);
+    ```
 
-- productos
+  - productos
 
-  ```sql
-    ALTER TABLE `productos`
-      ADD PRIMARY KEY (`id`),
-      ADD KEY `nombre` (`nombre`);
-  ```
+    ```sql
+      ALTER TABLE `productos`
+        ADD PRIMARY KEY (`id`),
+        ADD KEY `nombre` (`nombre`);
+    ```
 
-- clientes
+  - clientes
 
-  ```sql
-    ALTER TABLE `clientes`
-      ADD PRIMARY KEY (`id`),
-      ADD KEY `documento` (`documento`),
-      ADD KEY `nombre` (`nombre`),
-      ADD KEY `correo` (`correo`),
-      ADD KEY `estado` (`estado`);
-  ```
+    ```sql
+      ALTER TABLE `clientes`
+        ADD PRIMARY KEY (`id`),
+        ADD KEY `documento` (`documento`),
+        ADD KEY `nombre` (`nombre`),
+        ADD KEY `correo` (`correo`),
+        ADD KEY `estado` (`estado`);
+    ```
 
-- cobros
+  - cobros
 
-  ```sql
-    ALTER TABLE `cobros`
-      ADD PRIMARY KEY (`id`),
-      ADD KEY `codigoF` (`codigoF`);
-  ```
+    ```sql
+      ALTER TABLE `cobros`
+        ADD PRIMARY KEY (`id`),
+        ADD KEY `codigoF` (`codigoF`);
+    ```
 
-- ventas
+  - ventas
 
-  ```sql
-    ALTER TABLE `ventas`
-      ADD PRIMARY KEY (`id`),
-      ADD KEY `codigoF` (`codigoF`),
-      ADD KEY `codigoP` (`codigoP`),
-      ADD KEY `producto` (`producto`);
-  ```
+    ```sql
+      ALTER TABLE `ventas`
+        ADD PRIMARY KEY (`id`),
+        ADD KEY `codigoF` (`codigoF`),
+        ADD KEY `codigoP` (`codigoP`),
+        ADD KEY `producto` (`producto`);
+    ```
 
-- facturas
+  - facturas
 
-  ```sql
-    ALTER TABLE `facturas`
-      ADD PRIMARY KEY (`id`),
-      ADD KEY `cliente` (`cliente`);
-  ```
+    ```sql
+      ALTER TABLE `facturas`
+        ADD PRIMARY KEY (`id`),
+        ADD KEY `cliente` (`cliente`);
+    ```
 
-#### sql autoincrementos
+- #### autoincrementos
 
-- totales
+  - totales
 
-  ```sql
-    ALTER TABLE `totales`
-      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-  ```
+    ```sql
+      ALTER TABLE `totales`
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+    ```
 
-- entradas
+  - entradas
 
-  ```sql
-    ALTER TABLE `entradas`
-      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-  ```
+    ```sql
+      ALTER TABLE `entradas`
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+    ```
 
-- productos
+  - productos
 
-  ```sql
-    ALTER TABLE `productos`
-      ADD PRIMARY KEY (`id`),
-      ADD KEY `nombre` (`nombre`);
-  ```
+    ```sql
+      ALTER TABLE `productos`
+        ADD PRIMARY KEY (`id`),
+        ADD KEY `nombre` (`nombre`);
+    ```
 
-- clientes
+  - clientes
 
-  ```sql
-    ALTER TABLE `clientes`
-      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-  ```
+    ```sql
+      ALTER TABLE `clientes`
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+    ```
 
-- cobros
+  - cobros
 
-  ```sql
-    ALTER TABLE `cobros`
-      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-  ```
+    ```sql
+      ALTER TABLE `cobros`
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+    ```
 
-- ventas
+  - ventas
 
-  ```sql
-    ALTER TABLE `ventas`
-      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-  ```
+    ```sql
+      ALTER TABLE `ventas`
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+    ```
 
-#### sql restricciones
+- #### restricciones
 
-- entradas
+  - entradas
 
-  ```sql
-    ALTER TABLE `entradas`
-      ADD CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE,
-      ADD CONSTRAINT `entradas_ibfk_3` FOREIGN KEY (`indice`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  ```
+    ```sql
+      ALTER TABLE `entradas`
+        ADD CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE,
+        ADD CONSTRAINT `entradas_ibfk_3` FOREIGN KEY (`indice`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ```
 
-- cobros
+  - cobros
 
-  ```sql
-    ALTER TABLE `cobros`
-      ADD CONSTRAINT `cobros_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-  ```
+    ```sql
+      ALTER TABLE `cobros`
+        ADD CONSTRAINT `cobros_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ```
 
-- ventas
+  - ventas
 
-  ```sql
-    ALTER TABLE `ventas`
-      ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-      ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`producto`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE ON UPDATE CASCADE,
-      ADD CONSTRAINT `ventas_ibfk_4` FOREIGN KEY (`codigoP`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-    COMMIT;
-  ```
+    ```sql
+      ALTER TABLE `ventas`
+        ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+        ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`producto`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE ON UPDATE CASCADE,
+        ADD CONSTRAINT `ventas_ibfk_4` FOREIGN KEY (`codigoP`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+      COMMIT;
+    ```
 
-- facturas
+  - facturas
 
-  ```sql
-    ALTER TABLE `facturas`
-      ADD CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`cliente`) REFERENCES `clientes` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
-  ```
+    ```sql
+      ALTER TABLE `facturas`
+        ADD CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`cliente`) REFERENCES `clientes` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
+    ```
 
-#### Tipos de datos
+- #### modelos graficos
 
-- ##### Totales DB
+  - Totales DB
 
-| Id (Primaria) | Tipo | Fecha (Índice) | Concepto | Monto |
-| :---: | :------: | :--------: | :------: | :-----: |
-| int  | tinyInt | timestamp | varchar | double |
-| 11  | 1 | - | 100 | - |
+  | Id (Primaria) | Tipo | Fecha (Índice) | Concepto | Monto |
+  | :---: | :------: | :--------: | :------: | :-----: |
+  | int  | tinyInt | timestamp | varchar | double |
+  | 11  | 1 | - | 100 | - |
 
-- ##### Entradas DB
+  - Entradas DB
 
-| Id (Primaria) | Índice (Índice) | Nombre (Índice) | Fecha | Cantidad |
-| :---: | :------: | :--------: | :------: | :-----: |
-| int  | varchar | varchar | timestamp | int |
-| 11  | 10 | 100 | - | 11 |
+  | Id (Primaria) | Índice (Índice) | Nombre (Índice) | Fecha | Cantidad |
+  | :---: | :------: | :--------: | :------: | :-----: |
+  | int  | varchar | varchar | timestamp | int |
+  | 11  | 10 | 100 | - | 11 |
 
-- ##### Productos DB
+  - Productos DB
 
-| Id (Primaria) | Nombre (Índice) | Precio | Stock |
-| :-----------: | :-------------: | :----: | :---: |
-|    varchar    |     varchar     | double |  int  |
-|      10       |       100       |   8    |  11   |
+  | Id (Primaria) | Nombre (Índice) | Precio | Stock |
+  | :-----------: | :-------------: | :----: | :---: |
+  |    varchar    |     varchar     | double |  int  |
+  |      10       |       100       |   8    |  11   |
 
-- ##### Clientes DB
+  - Clientes DB
 
-| Id (Primaria) | Documento (Índice) | Nombre (Índice) | Dirección | Ciudad  | Teléfono | Correo  | Estado  |
-| :-----------: | :----------------: | :-------------: | :-------: | :-----: | :------: | :-----: | :-----: |
-|      int      |      varchar       |     varchar     |  varchar  | varchar | varchar  | varchar | tinyInt |
-|      11       |         13         |       100       |    100    |   80    |    50    |   100   |    1    |
+  | Id (Primaria) | Documento (Índice) | Nombre (Índice) | Dirección | Ciudad  | Teléfono | Correo  | Estado  |
+  | :-----------: | :----------------: | :-------------: | :-------: | :-----: | :------: | :-----: | :-----: |
+  |      int      |      varchar       |     varchar     |  varchar  | varchar | varchar  | varchar | tinyInt |
+  |      11       |         13         |       100       |    100    |   80    |    50    |   100   |    1    |
 
-- ##### Cobros DB
+  - Cobros DB
 
-| Id (Primaria) | CodigoF (Índice) | Cliente | Recaudo | fechaCobro |
-| :-----------: | :--------------: | :-----: | :-----: | :--------: |
-|      int      |     varchar      | varchar | double  | timestamp  |
-|      11       |        6         |   13    |    -    |     -      |
+  | Id (Primaria) | CodigoF (Índice) | Cliente | Recaudo | fechaCobro |
+  | :-----------: | :--------------: | :-----: | :-----: | :--------: |
+  |      int      |     varchar      | varchar | double  | timestamp  |
+  |      11       |        6         |   13    |    -    |     -      |
 
-- ##### Venta DB
+  - Venta DB
 
-| Id (Primaria) | CodigoF (Índice) | CodigoP (Índice) | Productos (Índice) | Unidades |
-| :-----------: | :--------------: | :--------------: | :----------------: | :------: |
-|      int      |     varchar      |     varchar      |      varchar       |   int    |
-|      11       |        6         |        10        |        100         |    6     |
+  | Id (Primaria) | CodigoF (Índice) | CodigoP (Índice) | Productos (Índice) | Unidades |
+  | :-----------: | :--------------: | :--------------: | :----------------: | :------: |
+  |      int      |     varchar      |     varchar      |      varchar       |   int    |
+  |      11       |        6         |        10        |        100         |    6     |
 
-- ##### Facturas DB
+  - Facturas DB
 
-| Id (Primaria) | Cliente (Índice) | FechaEntrega | FechaVencimiento | TipoPago | Subtotal | Total  | Observaciones | Estado  |
-| :-----------: | :--------------: | :----------: | :--------------: | :------: | :------: | :----: | :-----------: | :-----: |
-|    varchar    |     varchar      |   datetime   |       date       | tinyInt  |  double  | double |     text      | tinyInt |
-|       6       |        13        |      -       |        -         |    4     |    -     |   -    |       -       |    1    |
+  | Id (Primaria) | Cliente (Índice) | FechaEntrega | FechaVencimiento | TipoPago | Subtotal | Total  | Observaciones | Estado  |
+  | :-----------: | :--------------: | :----------: | :--------------: | :------: | :------: | :----: | :-----------: | :-----: |
+  |    varchar    |     varchar      |   datetime   |       date       | tinyInt  |  double  | double |     text      | tinyInt |
+  |       6       |        13        |      -       |        -         |    4     |    -     |   -    |       -       |    1    |
