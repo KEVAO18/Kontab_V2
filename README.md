@@ -11,7 +11,7 @@ Sistema contable creado para empresas pequeñas y medianas que necesitan mantene
     - [Facturación](#facturación)
     - [Registro de Clientes](#registro-de-clientes)
     - [Control de Stock](#control-de-stock)
-  - [SQL](#sql)
+  - [SQL](#sql-tablas)
     - [Totales](#totales-db)
     - [Entradas](#entradas-db)
     - [Productos](#productos-db)
@@ -24,9 +24,7 @@ Sistema contable creado para empresas pequeñas y medianas que necesitan mantene
 
 ### Configuraciones Iniciales
 
-Para comenzar has un **fork** o descarga nuestra ulyima vercion [aqui](https://github.com/KEVAO18/Kontab_V2/releases/tag/Kontab_Public_re) en nuestro servidor para poder manipularlo y cambiarlo, seguido de esto entraremos a nuestra copia y iniciamos con la configuración:
-
-Para comenzar has un **fork** o descarga nuestra ultima version [aqui](https://github.com/KEVAO18/Kontab_V2/releases/tag/Kontab_Public_re) en nuestro servidor para poder manipularlo y cambiarlo, seguido de esto entraremos a nuestra copia y iniciamos con la configuración:
+Para comenzar descarga nuestra ultima version para poder manipularlo y cambiarlo, seguido de esto entraremos a nuestra copia y iniciamos con la configuración:
 
 - ingresaremos al archivo .env en el cual se encuentran los principales campos a configurar
 
@@ -96,7 +94,8 @@ Lo primero será ingresar los clientes al sistema, del cual necesitáremos los d
 
 Luego de esto ya podrás usar el sistema contable con normalidad ya que sin estos datos el no puede facturar o generar ninguna compra y felicidades, tu sistema contable integrado Kontab versión 2 ya esta funcionando
 
-#### sql:
+#### sql tablas
+
 - primer paso: crear la base de datos
 
   ```sql
@@ -193,6 +192,151 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         `estado` tinyint(1) NOT NULL
       ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
     ```
+
+### sql indices
+
+- totales
+
+  ```sql
+    ALTER TABLE `totales`
+      ADD PRIMARY KEY (`id`),
+      ADD KEY `fecha` (`fecha`);
+  ```
+
+- entradas
+
+  ```sql
+    ALTER TABLE `entradas`
+      ADD PRIMARY KEY (`id`) USING BTREE,
+      ADD KEY `nombre` (`nombre`),
+      ADD KEY `indice` (`indice`);
+  ```
+
+- productos
+
+  ```sql
+    ALTER TABLE `productos`
+      ADD PRIMARY KEY (`id`),
+      ADD KEY `nombre` (`nombre`);
+  ```
+
+- clientes
+
+  ```sql
+    ALTER TABLE `clientes`
+      ADD PRIMARY KEY (`id`),
+      ADD KEY `documento` (`documento`),
+      ADD KEY `nombre` (`nombre`),
+      ADD KEY `correo` (`correo`),
+      ADD KEY `estado` (`estado`);
+  ```
+
+- cobros
+
+  ```sql
+    ALTER TABLE `cobros`
+      ADD PRIMARY KEY (`id`),
+      ADD KEY `codigoF` (`codigoF`);
+  ```
+
+- ventas
+
+  ```sql
+    ALTER TABLE `ventas`
+      ADD PRIMARY KEY (`id`),
+      ADD KEY `codigoF` (`codigoF`),
+      ADD KEY `codigoP` (`codigoP`),
+      ADD KEY `producto` (`producto`);
+  ```
+
+- facturas
+
+  ```sql
+    ALTER TABLE `facturas`
+      ADD PRIMARY KEY (`id`),
+      ADD KEY `cliente` (`cliente`);
+  ```
+
+#### sql autoincrementos
+
+- totales
+
+  ```sql
+    ALTER TABLE `totales`
+      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  ```
+
+- entradas
+
+  ```sql
+    ALTER TABLE `entradas`
+      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  ```
+
+- productos
+
+  ```sql
+    ALTER TABLE `productos`
+      ADD PRIMARY KEY (`id`),
+      ADD KEY `nombre` (`nombre`);
+  ```
+
+- clientes
+
+  ```sql
+    ALTER TABLE `clientes`
+      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  ```
+
+- cobros
+
+  ```sql
+    ALTER TABLE `cobros`
+      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  ```
+
+- ventas
+
+  ```sql
+    ALTER TABLE `ventas`
+      MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  ```
+
+#### sql restricciones
+
+- entradas
+
+  ```sql
+    ALTER TABLE `entradas`
+      ADD CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE,
+      ADD CONSTRAINT `entradas_ibfk_3` FOREIGN KEY (`indice`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ```
+
+- cobros
+
+  ```sql
+    ALTER TABLE `cobros`
+      ADD CONSTRAINT `cobros_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ```
+
+- ventas
+
+  ```sql
+    ALTER TABLE `ventas`
+      ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+      ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`producto`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE ON UPDATE CASCADE,
+      ADD CONSTRAINT `ventas_ibfk_4` FOREIGN KEY (`codigoP`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+    COMMIT;
+  ```
+
+- facturas
+
+  ```sql
+    ALTER TABLE `facturas`
+      ADD CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`cliente`) REFERENCES `clientes` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ```
+
+#### Tipos de datos
 
 - ##### Totales DB
 
