@@ -39,6 +39,8 @@ Para comenzar descarga nuestra ultima version para poder manipularlo y cambiarlo
 
      - **NEGOCIO_TELEFONO** (N° de Teléfono o Celular de tu negocio)
 
+     - **NEGOCIO_REGIMEN** (Tipo de regimen de la empresa)
+
   2. Lo siguiente es cambiar la ubicación de tu proyecto en tu servidor, en el campo **PAGE_SERVE** debes cambiar el contenido por la tuya la cual por defecto puede ser **tudominio.com/Kontab2**
 
   3. Por ultimo la configuración de la **BD**, para esta tenemos que cambiar los siguientes campos:
@@ -57,7 +59,9 @@ Kontab es un sistema contable que pone la organización en tu negocio de una for
 - Tabla de Ingresos
 
 - Tabla de egresos
+
 - Tabla de totales, Esta tabla es la unión de las tablas: ingresos y egresos
+
 - ingreso nuevo, es un nuevo ingreso o egreso (tipo, Concepto o asunto, monto)
 
 #### Facturación
