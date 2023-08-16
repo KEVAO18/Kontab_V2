@@ -236,6 +236,7 @@ function factura($id){
         </article>
         <div class="d-grid gap-4 py-4">
             <a href="<?=$_ENV['PAGE_SERVE']?>handlers/pdf/facturaToPdf.php?id=<?=$id?>" class="btn btn-outline-danger fw-bold display-factura">Generar Pdf</a>
+            <a href="<?=$_ENV['PAGE_SERVE']?>handlers/pdf/facturaToPrint.php?id=<?=$id?>" class="btn btn-outline-info fw-bold display-factura">Generar tirilla</a>
         </div>
     </section>
     <?php
