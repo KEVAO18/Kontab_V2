@@ -269,14 +269,14 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
 
     ```sql
       ALTER TABLE `totales`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
     ```
 
   - entradas
 
     ```sql
       ALTER TABLE `entradas`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
     ```
 
   - productos
@@ -291,21 +291,21 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
 
     ```sql
       ALTER TABLE `clientes`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
     ```
 
   - cobros
 
     ```sql
       ALTER TABLE `cobros`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
     ```
 
   - ventas
 
     ```sql
       ALTER TABLE `ventas`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
     ```
 
 - #### restricciones
