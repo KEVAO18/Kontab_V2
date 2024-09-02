@@ -112,234 +112,155 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
   - la tabla totales
 
     ```sql
-      CREATE TABLE `kontabapi`.`totales` (
-        `id` int(11) NOT NULL,
-        `tipo` tinyint(1) NOT NULL,
-        `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-        `concepto` varchar(100) NOT NULL,
-        `monto` double NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-    ```
+    create table totales(
+        -- campos: id, tipo, fecha, concepto, monto
+        id int(11) auto_increment not null,
+        tipo tinyint(1) not null,
+        fecha timestamp not null default current_timestamp() on update current_timestamp(),
+        concepto varchar(100) not null,
+        monto double not null,
 
-  - la tabla entradas
-
-    ```sql
-      CREATE TABLE `kontabapi`.`entradas` (
-        `id` int(11) NOT NULL,
-        `indice` varchar(10) NOT NULL,
-        `nombre` varchar(100) NOT NULL,
-        `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-        `cantidad` int(11) NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        -- primarias, foraneas e indices
+        CONSTRAINT pk_totales PRIMARY KEY (id),
+        INDEX (fecha)
+    );
     ```
 
   - la tabla productos
 
     ```sql
-      CREATE TABLE `kontabapi`.`productos` (
-        `id` varchar(10) NOT NULL,
-        `nombre` varchar(100) NOT NULL,
-        `precio` int(8) NOT NULL,
-        `stock` int(11) NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    create table productos(
+        id varchar(10) NOT NULL,
+        nombre varchar(100) NOT NULL,
+        precio int(8) NOT NULL,
+        stock int(11) NOT NULL,
+        -- primarias, foraneas e indices
+        CONSTRAINT pk_productos PRIMARY KEY (id),
+        INDEX (nombre)
+    );
+    ```
+
+  - la tabla entradas
+
+    ```sql
+    create table entradas(
+        id int(11) auto_increment not null,
+        indice varchar(10) not null,
+        nombre varchar(100) not null,
+        fecha TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+        cantidad int(11) NOT NULL,
+        -- primarias, foraneas e indices
+        CONSTRAINT pk_entradas PRIMARY KEY (id),
+        CONSTRAINT fk_nombre_de_producto_entrada
+        FOREIGN KEY (`nombre`) 
+        REFERENCES `productos` (`nombre`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+        CONSTRAINT fk_indice_de_producto_entrada
+        FOREIGN KEY (`indice`) 
+        REFERENCES `productos` (`id`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+        INDEX (nombre),
+        INDEX (indice)
+    );
     ```
 
   - la tabla clientes
 
     ```sql
-      CREATE TABLE `kontabapi`.`clientes` (
-        `id` int(11) NOT NULL,
-        `documento` varchar(13) NOT NULL,
-        `nombre` varchar(100) NOT NULL,
-        `direccion` varchar(100) NOT NULL,
-        `ciudad` varchar(80) NOT NULL,
-        `telefono` varchar(50) NOT NULL,
-        `correo` varchar(100) NOT NULL,
-        `estado` tinyint(1) NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-    ```
-
-  - la tabla cobros
-
-    ```sql
-      CREATE TABLE `kontabapi`.`cobros` (
-        `id` int(11) NOT NULL,
-        `codigoF` varchar(6) NOT NULL,
-        `cliente` varchar(13) NOT NULL,
-        `recaudo` double NOT NULL,
-        `fechaCobro` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-    ```
-
-  - la tabla ventas
-
-    ```sql
-      CREATE TABLE `ventas` (
-        `id` int(11) NOT NULL,
-        `codigoF` varchar(6) NOT NULL,
-        `codigoP` varchar(10) NOT NULL,
-        `producto` varchar(100) NOT NULL,
-        `unidades` int(6) NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    create table clientes(
+        id int(11) auto_increment NOT NULL,
+        documento varchar(13) NOT NULL,
+        nombre varchar(100) NOT NULL,
+        direccion varchar(100) NOT NULL,
+        ciudad varchar(80) NOT NULL,
+        telefono varchar(50) NOT NULL,
+        correo varchar(100) NOT NULL,
+        estado tinyint(1) NOT NULL,
+        -- primarias, foraneas e indices
+        constraint pk_clientes primary key (id),
+        INDEX documento (documento),
+        INDEX nombre (nombre),
+        INDEX correo (correo),
+        INDEX estado (estado)
+    );
     ```
 
   - la tabla facturas
 
     ```sql
-      CREATE TABLE `kontabapi`.`facturas` (
-        `id` varchar(6) NOT NULL,
-        `cliente` varchar(13) NOT NULL,
-        `fechaEntrega` datetime NOT NULL,
-        `fechaVencimiento` date NOT NULL,
-        `tipoPago` tinyint(4) NOT NULL,
-        `subtotal` double NOT NULL,
-        `total` double NOT NULL,
-        `observaciones` text NOT NULL,
-        `estado` tinyint(1) NOT NULL
-      ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    create table facturas(
+        id varchar(6) NOT NULL,
+        cliente varchar(13) NOT NULL,
+        fechaEntrega datetime NOT NULL,
+        fechaVencimiento date NOT NULL,
+        tipoPago tinyint(4) NOT NULL,
+        subtotal double NOT NULL,
+        total double NOT NULL,
+        observaciones text NOT NULL,
+        estado tinyint(1) NOT NULL,
+        -- primarias, foraneas e indices
+        constraint pk_facturas primary key(id),
+        CONSTRAINT fk_documento_de_clientes_facturas
+        FOREIGN KEY (`cliente`) 
+        REFERENCES `clientes` (`documento`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+        INDEX (cliente)
+    );
     ```
 
-- ### indices
-
-  - totales
+  - la tabla cobros
 
     ```sql
-      ALTER TABLE `totales`
-        ADD PRIMARY KEY (`id`),
-        ADD KEY `fecha` (`fecha`);
+    create table cobros(
+        id int(11) auto_increment NOT NULL,
+        codigoF varchar(6) NOT NULL,
+        cliente varchar(13) NOT NULL,
+        recaudo double NOT NULL,
+        fechaCobro timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+        -- primarias, foraneas e indices
+        constraint pk_cobros primary key(id),
+        CONSTRAINT  fk_id_factura_cobro
+        FOREIGN KEY (`codigoF`) 
+        REFERENCES `facturas` (`id`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+        INDEX (codigoF)
+    );
     ```
 
-  - entradas
+  - la tabla ventas
 
     ```sql
-      ALTER TABLE `entradas`
-        ADD PRIMARY KEY (`id`) USING BTREE,
-        ADD KEY `nombre` (`nombre`),
-        ADD KEY `indice` (`indice`);
-    ```
-
-  - productos
-
-    ```sql
-      ALTER TABLE `productos`
-        ADD PRIMARY KEY (`id`),
-        ADD KEY `nombre` (`nombre`);
-    ```
-
-  - clientes
-
-    ```sql
-      ALTER TABLE `clientes`
-        ADD PRIMARY KEY (`id`),
-        ADD KEY `documento` (`documento`),
-        ADD KEY `nombre` (`nombre`),
-        ADD KEY `correo` (`correo`),
-        ADD KEY `estado` (`estado`);
-    ```
-
-  - cobros
-
-    ```sql
-      ALTER TABLE `cobros`
-        ADD PRIMARY KEY (`id`),
-        ADD KEY `codigoF` (`codigoF`);
-    ```
-
-  - ventas
-
-    ```sql
-      ALTER TABLE `ventas`
-        ADD PRIMARY KEY (`id`),
-        ADD KEY `codigoF` (`codigoF`),
-        ADD KEY `codigoP` (`codigoP`),
-        ADD KEY `producto` (`producto`);
-    ```
-
-  - facturas
-
-    ```sql
-      ALTER TABLE `facturas`
-        ADD PRIMARY KEY (`id`),
-        ADD KEY `cliente` (`cliente`);
-    ```
-
-- #### autoincrementos
-
-  - totales
-
-    ```sql
-      ALTER TABLE `totales`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-    ```
-
-  - entradas
-
-    ```sql
-      ALTER TABLE `entradas`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
-    ```
-
-  - productos
-
-    ```sql
-      ALTER TABLE `productos`
-        ADD PRIMARY KEY (`id`),
-        ADD KEY `nombre` (`nombre`);
-    ```
-
-  - clientes
-
-    ```sql
-      ALTER TABLE `clientes`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-    ```
-
-  - cobros
-
-    ```sql
-      ALTER TABLE `cobros`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-    ```
-
-  - ventas
-
-    ```sql
-      ALTER TABLE `ventas`
-        MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-    ```
-
-- #### restricciones
-
-  - entradas
-
-    ```sql
-      ALTER TABLE `entradas`
-        ADD CONSTRAINT `entradas_ibfk_2` FOREIGN KEY (`nombre`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE,
-        ADD CONSTRAINT `entradas_ibfk_3` FOREIGN KEY (`indice`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-    ```
-
-  - cobros
-
-    ```sql
-      ALTER TABLE `cobros`
-        ADD CONSTRAINT `cobros_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-    ```
-
-  - ventas
-
-    ```sql
-      ALTER TABLE `ventas`
-        ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`codigoF`) REFERENCES `facturas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-        ADD CONSTRAINT `ventas_ibfk_3` FOREIGN KEY (`producto`) REFERENCES `productos` (`nombre`) ON DELETE CASCADE ON UPDATE CASCADE,
-        ADD CONSTRAINT `ventas_ibfk_4` FOREIGN KEY (`codigoP`) REFERENCES `productos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-      COMMIT;
-    ```
-
-  - facturas
-
-    ```sql
-      ALTER TABLE `facturas`
-        ADD CONSTRAINT `facturas_ibfk_1` FOREIGN KEY (`cliente`) REFERENCES `clientes` (`documento`) ON DELETE CASCADE ON UPDATE CASCADE;
+    create table ventas(
+        id int(11) auto_increment NOT NULL,
+        codigoF varchar(6) NOT NULL,
+        codigoP varchar(10) NOT NULL,
+        producto varchar(100) NOT NULL,
+        unidades int(6) NOT NULL,
+        -- primarias, foraneas e indices
+        constraint pk_ventas primary key (id),
+        CONSTRAINT fk_codigo_de_fcatura_ventas
+        FOREIGN KEY (`codigoF`) 
+        REFERENCES `facturas` (`id`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+        CONSTRAINT fk_nombre_de_producto_ventas
+        FOREIGN KEY (`producto`) 
+        REFERENCES `productos` (`nombre`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+        CONSTRAINT fk_codigo_de_producto_ventas
+        FOREIGN KEY (`codigoP`) 
+        REFERENCES `productos` (`id`) 
+        ON DELETE CASCADE 
+        ON UPDATE CASCADE,
+        INDEX (codigoF),
+        INDEX (codigoP),
+        INDEX (producto)
+    );
     ```
 
 - #### modelos graficos
