@@ -7,7 +7,7 @@ Sistema contable creado para empresas pequeñas y medianas que necesitan mantene
 - [Manual de Uso](#manual-de-uso)
   - [Configuraciones Iniciales](#configuraciones-iniciales)
   - [Primeros Pasos](#primeros-pasos-en-kontab-2)
-    - [Contabilidad](#contabilidad)
+    - [Administracion de caja mayor](#administracion-de-caja-mayor)
     - [Facturación](#facturación)
     - [Registro de Clientes](#registro-de-clientes)
     - [Control de Stock](#control-de-stock)
@@ -37,7 +37,7 @@ Para comenzar descarga nuestra ultima version para poder manipularlo y cambiarlo
 
      - **NEGOCIO_REGIMEN** (Tipo de regimen de la empresa)
 
-  2. Lo siguiente es cambiar la ubicación de tu proyecto en tu servidor, en el campo **PAGE_SERVE** debes cambiar el contenido por la tuya la cual por defecto puede ser **tudominio.com/Kontab2**
+  2. Lo siguiente es cambiar la ubicación de tu proyecto en tu servidor, en el campo **PAGE_SERVE** debes cambiar el contenido por la tuya la cual por defecto puede ser **tudominio.com/**
 
   3. Por ultimo la configuración de la **BD**, para esta tenemos que cambiar los siguientes campos:
      - **DB_NAME** (Nombre de la BD por defecto es "**kontabapi**")
@@ -50,7 +50,7 @@ Para comenzar descarga nuestra ultima version para poder manipularlo y cambiarlo
 
 Kontab es un sistema contable que pone la organización en tu negocio de una forma mas sencilla, de esta manera el comenzar será mas sencillo, para iniciar tenemos la distribución de
 
-#### Contabilidad
+#### Administracion de caja mayor
 
 - Tabla de Ingresos
 
@@ -93,60 +93,88 @@ Lo primero será ingresar los clientes al sistema, del cual necesitáremos los d
 
 Luego de esto ya podrás usar el sistema contable con normalidad ya que sin estos datos el no puede facturar o generar ninguna compra y felicidades, tu sistema contable integrado Kontab versión 2 ya esta funcionando
 
-### SQL
+### Base de Datos
 
-- #### base de datos
+- #### SQL
 
     ```sql
+    -------------------------------------------
+    --     creacion de la base de datos      --
+    -------------------------------------------
+
     CREATE DATABASE kontabapi;
     USE kontabapi;
 
+    -------------------------------------------
+    --        creacion de las tablas         --
+    -------------------------------------------
+
     create table totales(
+
         -- campos: id, tipo, fecha, concepto, monto
         id int(11) auto_increment not null,
         tipo tinyint(1) not null,
-        fecha timestamp not null default current_timestamp() on update current_timestamp(),
+        fecha timestamp not null 
+        DEFAULT current_timestamp() 
+        ON UPDATE current_timestamp(),
         concepto varchar(100) not null,
         monto double not null,
 
         -- primarias, foraneas e indices
         CONSTRAINT pk_totales PRIMARY KEY (id),
+
         INDEX (fecha)
     );
 
     create table productos(
+
+        -- campos: id, nombre, precio, stock,
         id varchar(10) NOT NULL,
         nombre varchar(100) NOT NULL,
         precio int(8) NOT NULL,
         stock int(11) NOT NULL,
+
         -- primarias, foraneas e indices
         CONSTRAINT pk_productos PRIMARY KEY (id),
+
         INDEX (nombre)
     );
 
     create table entradas(
+
+        -- campos: id, indice, nombre, fecha, cantidad
         id int(11) auto_increment not null,
         indice varchar(10) not null,
         nombre varchar(100) not null,
-        fecha TIMESTAMP NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+        fecha TIMESTAMP NOT NULL 
+        DEFAULT current_timestamp() 
+        ON UPDATE current_timestamp(),
         cantidad int(11) NOT NULL,
+
         -- primarias, foraneas e indices
         CONSTRAINT pk_entradas PRIMARY KEY (id),
+
         CONSTRAINT fk_nombre_de_producto_entrada
         FOREIGN KEY (`nombre`) 
         REFERENCES `productos` (`nombre`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE,
+
         CONSTRAINT fk_indice_de_producto_entrada
         FOREIGN KEY (`indice`) 
         REFERENCES `productos` (`id`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE,
+
         INDEX (nombre),
         INDEX (indice)
     );
 
     create table clientes(
+
+        -- campos: id, documento, nombre, 
+        -- direccion, ciudad, telefono, 
+        -- correo, estado
         id int(11) auto_increment NOT NULL,
         documento varchar(13) NOT NULL,
         nombre varchar(100) NOT NULL,
@@ -155,8 +183,10 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         telefono varchar(50) NOT NULL,
         correo varchar(100) NOT NULL,
         estado tinyint(1) NOT NULL,
+
         -- primarias, foraneas e indices
         constraint pk_clientes primary key (id),
+
         INDEX documento (documento),
         INDEX nombre (nombre),
         INDEX correo (correo),
@@ -164,6 +194,10 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
     );
 
     create table facturas(
+
+        -- campos: id, cliente, fechaEntrega, 
+        -- fechaVencimiento, tipoPago, subtotal, 
+        -- total, observaciones, estado
         id varchar(6) NOT NULL,
         cliente varchar(13) NOT NULL,
         fechaEntrega datetime NOT NULL,
@@ -173,62 +207,79 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         total double NOT NULL,
         observaciones text NOT NULL,
         estado tinyint(1) NOT NULL,
+
         -- primarias, foraneas e indices
         constraint pk_facturas primary key(id),
+
         CONSTRAINT fk_documento_de_clientes_facturas
         FOREIGN KEY (`cliente`) 
         REFERENCES `clientes` (`documento`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE,
+
         INDEX (cliente)
     );
 
     create table cobros(
+
+        -- campos: id, codigoF, cliente, recaudo, fechaCobro
         id int(11) auto_increment NOT NULL,
         codigoF varchar(6) NOT NULL,
         cliente varchar(13) NOT NULL,
         recaudo double NOT NULL,
-        fechaCobro timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+        fechaCobro timestamp NOT NULL 
+        DEFAULT current_timestamp() 
+        ON UPDATE current_timestamp(),
+
         -- primarias, foraneas e indices
         constraint pk_cobros primary key(id),
+
         CONSTRAINT  fk_id_factura_cobro
         FOREIGN KEY (`codigoF`) 
         REFERENCES `facturas` (`id`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE,
+
         INDEX (codigoF)
     );
 
     create table ventas(
+
+        -- campos: id, codigoF, codigoP, producto, unidades
         id int(11) auto_increment NOT NULL,
         codigoF varchar(6) NOT NULL,
         codigoP varchar(10) NOT NULL,
         producto varchar(100) NOT NULL,
         unidades int(6) NOT NULL,
+
         -- primarias, foraneas e indices
         constraint pk_ventas primary key (id),
+
         CONSTRAINT fk_codigo_de_fcatura_ventas
         FOREIGN KEY (`codigoF`) 
         REFERENCES `facturas` (`id`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE,
+
         CONSTRAINT fk_nombre_de_producto_ventas
         FOREIGN KEY (`producto`) 
         REFERENCES `productos` (`nombre`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE,
+
         CONSTRAINT fk_codigo_de_producto_ventas
         FOREIGN KEY (`codigoP`) 
         REFERENCES `productos` (`id`) 
         ON DELETE CASCADE 
         ON UPDATE CASCADE,
+
         INDEX (codigoF),
         INDEX (codigoP),
         INDEX (producto)
     );
     ```
 
-- #### modelos graficos
+- #### Modelos Graficos
 
   - Totales DB
 
