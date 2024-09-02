@@ -13,7 +13,6 @@ Sistema contable creado para empresas pequeñas y medianas que necesitan mantene
     - [Control de Stock](#control-de-stock)
 - [SQL](#sql)
   - [Base de datos](#base-de-datos)
-  - [Tablas](#tablas)
   - [Modelos graficos](#modelos-graficos)
   
 ## Manual de Uso
@@ -98,17 +97,10 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
 
 - #### base de datos
 
-  - primer paso: crear la base de datos
-
     ```sql
-      CREATE DATABASE kontabapi;
-    ```
+    CREATE DATABASE kontabapi;
+    USE kontabapi;
 
-- #### tablas
-
-  - la tabla totales
-
-    ```sql
     create table totales(
         -- campos: id, tipo, fecha, concepto, monto
         id int(11) auto_increment not null,
@@ -121,11 +113,7 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         CONSTRAINT pk_totales PRIMARY KEY (id),
         INDEX (fecha)
     );
-    ```
 
-  - la tabla productos
-
-    ```sql
     create table productos(
         id varchar(10) NOT NULL,
         nombre varchar(100) NOT NULL,
@@ -135,11 +123,7 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         CONSTRAINT pk_productos PRIMARY KEY (id),
         INDEX (nombre)
     );
-    ```
 
-  - la tabla entradas
-
-    ```sql
     create table entradas(
         id int(11) auto_increment not null,
         indice varchar(10) not null,
@@ -161,11 +145,7 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         INDEX (nombre),
         INDEX (indice)
     );
-    ```
 
-  - la tabla clientes
-
-    ```sql
     create table clientes(
         id int(11) auto_increment NOT NULL,
         documento varchar(13) NOT NULL,
@@ -182,11 +162,7 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         INDEX correo (correo),
         INDEX estado (estado)
     );
-    ```
 
-  - la tabla facturas
-
-    ```sql
     create table facturas(
         id varchar(6) NOT NULL,
         cliente varchar(13) NOT NULL,
@@ -206,11 +182,7 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         ON UPDATE CASCADE,
         INDEX (cliente)
     );
-    ```
 
-  - la tabla cobros
-
-    ```sql
     create table cobros(
         id int(11) auto_increment NOT NULL,
         codigoF varchar(6) NOT NULL,
@@ -226,11 +198,7 @@ Luego de esto ya podrás usar el sistema contable con normalidad ya que sin esto
         ON UPDATE CASCADE,
         INDEX (codigoF)
     );
-    ```
 
-  - la tabla ventas
-
-    ```sql
     create table ventas(
         id int(11) auto_increment NOT NULL,
         codigoF varchar(6) NOT NULL,
