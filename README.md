@@ -1,3 +1,17 @@
+<p align="center">
+  <img src="assets/img/banner.png" />
+</p>
+
+<p align="center">
+  <img alt="Static Badge" src="https://img.shields.io/badge/Javascript-343131?logo=javascript">
+  <img alt="Static Badge" src="https://img.shields.io/badge/Bootstrap-8A2BE2?style=plastic&logo=bootstrap&logoColor=white">
+  <img alt="Static Badge" src="https://img.shields.io/badge/PHP_version_8.2-55679C?style=plastic&logo=php&logoColor=white">
+  <img alt="Static Badge" src="https://img.shields.io/badge/CSS-3FA2F6?logo=css3">
+  <img alt="Static Badge" src="https://img.shields.io/badge/MySQL-FF9100?style=plastic&logo=mysql&logoColor=white">
+  <img alt="Static Badge" src="https://img.shields.io/badge/HTML-FFF5E4?style=plastic&logo=html5">
+
+</p>
+
 # KONTAB 2
 
 Sistema contable creado para empresas pequeñas y medianas que necesitan mantener sus cuentas en orden
