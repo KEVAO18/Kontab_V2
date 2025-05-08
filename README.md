@@ -9,6 +9,7 @@
   <img alt="Static Badge" src="https://img.shields.io/badge/CSS-3FA2F6?logo=css3">
   <img alt="Static Badge" src="https://img.shields.io/badge/MySQL-FF9100?style=plastic&logo=mysql&logoColor=white">
   <img alt="Static Badge" src="https://img.shields.io/badge/HTML-FFF5E4?style=plastic&logo=html5">
+  <a href="https://deepwiki.com/KEVAO18/Kontab_V2"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 
 </p>
 
